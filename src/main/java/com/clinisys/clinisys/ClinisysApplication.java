@@ -8,6 +8,8 @@ public class ClinisysApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClinisysApplication.class, args);
+		System.out.print("teste");
 	}
-
+	
+	
 }
