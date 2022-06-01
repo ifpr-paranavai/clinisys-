@@ -10,6 +10,5 @@ public class ClinisysApplication {
 		SpringApplication.run(ClinisysApplication.class, args);
 		System.out.print("teste");
 	}
-	
-	
+
 }

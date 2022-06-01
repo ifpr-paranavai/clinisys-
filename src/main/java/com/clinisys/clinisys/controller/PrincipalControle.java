@@ -8,6 +8,12 @@ public class PrincipalControle {
 	
 	@GetMapping("/administrativo")
 	public String acessarPrincipal() {
-		return "administrativo/index";
+		return "administrativo/indexfuncionario";
+	}
+	
+	//
+	@GetMapping("/login")
+	public String acessarLogin() {
+		return "/login";
 	}
 }
