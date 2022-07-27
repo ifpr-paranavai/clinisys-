@@ -34,6 +34,7 @@ public class Funcionario implements Serializable{
 	private String funcao;
 	private String email;
 	private String senha;
+	
 	public Long getId() {
 		return id;
 	}
