@@ -1,180 +1,385 @@
-<!DOCTYPE HTML>
-<html xmlns:layout="http://www.w3.org/1999/xhtml"
-	layout:decorate="~{administrativo/fragments/layout}">
+<!DOCTYPE html>
+<html lang="pt-br">
+	<!-- xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{administrativo/fragments/layout}"> -->
 <head>
-<title>P·gina de Cadastro de Funcion·rios</title>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Painel Administrativo</title>
+
+<!-- Custom fonts for this template-->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
 </head>
-<body>
-	<section class="layout-content" layout:fragment="corpo">
-		<div class="page-header">
-			<nav class="navbar navbar-expand-md navbar-top bg-light">
-				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-					<ul class="navbar-nav">
-						<li class="nav-item active"><i class="oi oi-caret-right"></i>
-							<span>Cadastrar Funcion·rio</span></li>
-					</ul>
-				</div>
-				<a class="btn btn-primary btn-md"
-					href="/administrativo/funcionarios/listar" role="button"> <span
-					class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
-					<span>Listar Funcion·rios</span>
-				</a>
-			</nav>
-		</div>
 
-		<div class="container" id="cadastro">
-			<form action="/administrativo/funcionarios/salvar"
-				th:object="${funcionario}" method="POST">
-				<form onsubmit="return validacaoDeCPF()"
-					action="/administrativo/funcionarios/salvar"
-					th:object="${funcionario}" method="POST">
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label for="nome">Nome do Funcion·rio</label> <input type="text"
-								class="form-control" id="nome" placeholder="Nome Completo"
-								autofocus="autofocus" th:field="*{nome}" value="" />
-							<div class="invalid-feedback"></div>
-						</div>
+<body id="page-top">
 
-						<div class="form-group col-md-4">
-							<label for="cpf">CPF</label> <input type="text"
-								class="form-control cpf-mask"
-								onblur="if (this.value !== '') {validacaoDeCPF()}"
-								placeholder="Insira apenas os n˙meros do CPF"
-								data-mask="000.000.000-00" id="cpf" name="cpf" th:field="*{cpf}"
-								maxlength="14" value="" /> <span
-								class="font-weight-bold text-danger" role="alert"
-								id="retornoFalse"></span> <span
-								class="font-weight-bold text-success" role="alert"
-								id="retornoTrue"></span>
-						</div>
-						
-						<div class="form-group col-md-4">
-							<label for="rg">RG</label> <input type="text"
-								class="form-control rg-mask"
-								placeholder="Insira apenas os n˙meros do RG"
-								id="rg" name="rg" th:field="*{rg}"
-								value="" /> <span
-								class="font-weight-bold text-danger" role="alert"
-								id="retornoFalse"></span> <span
-								class="font-weight-bold text-success" role="alert"
-								id="retornoTrue"></span>
-						</div>
+	<!-- Page Wrapper -->
+	<div id="wrapper">
 
-<!-- 						<div class="form-group col-md-6"> -->
-<!-- 							<label for="salario">Sal·rio Bruto</label> <input type="text" -->
-<!-- 								class="form-control" id="salario" data-mask="#.###,00" -->
-<!-- 								data-mask-reverse="true" th:field="*{salarioBruto}" value="" /> -->
-<!-- 							<div class="invalid-feedback"></div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="form-row"> -->
-<!-- 						<div class="form-group col-md-6"> -->
-<!-- 							<label for="cargo">Cargo</label> <select id="cargo" -->
-<!-- 								class="form-control" name="cargo"> -->
-<!-- 								<option value="">Selecione...</option> -->
-<!-- 								<option value="1">Auxiliar Cont·bil</option> -->
-<!-- 								<option value="2">Auxiliar Administrativo</option> -->
-<!-- 								<option value="3">Contador</option> -->
-<!-- 								<option value="4">Adminitrador</option> -->
-<!-- 							</select> -->
-<!-- 							<div class="invalid-feedback"></div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="form-row"> -->
-<!-- 						<div class="form-group col-md-6"> -->
-<!-- 							<label for="cidade">Cidade</label> <select th:field="*{cidade}" -->
-<!-- 								class="form-control"> -->
-<!-- 								<option th:each="cid: ${listaCidades}" th:value="${cid.id}" -->
-<!-- 									th:text="${cid.nome}"></option> -->
-<!-- 							</select> -->
+		<!-- Sidebar -->
+		<ul
+			class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+
+			<!-- Sidebar - Brand -->
+			<a
+				class="sidebar-brand d-flex align-items-center justify-content-center"
+				href="index.html">
+				<div class="sidebar-brand-icon rotate-n-15"></div>
+				<div class="h2 sidebar-brand-text mx-3">Clinisys</div>
+			</a>
+			
+			
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
+
+			<!-- Nav Item - Dashboard -->
+			<li class="nav-item active"><a class="nav-link"
+				href="/administrativo"> <i class="fas fa-fw fa-tachometer-alt" ></i> <span>Dashboard</span></a>
+			</li>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider">
+
+			<!-- Heading -->
+			<div class="sidebar-heading">Cadastrar</div>
+
+			<!-- Nav Item - Funcion√°rios Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseFuncionario"
+				aria-expanded="true" aria-controls="collapseFuncionario"> <i
+					class="fas fa-fw fa-user"></i> <span>Funcion√°rios</span>
+			</a>
+				<div id="collapseFuncionario" class="collapse"
+					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">A√ß√µes Funcion√°rio:</h6>
+						<a class="collapse-item" href="CadastrarFuncionario.html">Cadastrar</a>
+						<a class="collapse-item" href="ListarUsuariosFuncionarios.html">Listar
+							Funcion√°rios</a>
+					</div>
+				</div></li>
 
 
-<!-- 							<div class="invalid-feedback"></div> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group col-md-6"> -->
-<!-- 							<label for="logradouro">Logradouro</label> <input type="text" -->
-<!-- 								class="form-control" id="logradouro" -->
-<!-- 								placeholder="logradouro sem n˙mero" name="logradouro" value="" /> -->
-<!-- 							<div class="invalid-feedback"></div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="form-row"> -->
-<!-- 						<div class="form-group col-md-6"> -->
-<!-- 							<label for="numero">N˙mero</label> <input type="text" -->
-<!-- 								class="form-control" id="numero" name="numero" value="" /> -->
-<!-- 							<div class="invalid-feedback"></div> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group col-md-6"> -->
-<!-- 							<label for="complemento">Complemento</label> <input type="text" -->
-<!-- 								class="form-control" id="complemento" -->
-<!-- 								placeholder="fundos, casa, AP. 102, .." name="complemento" -->
-<!-- 								value="" /> -->
-<!-- 							<div class="invalid-feedback"></div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="form-row"> -->
-<!-- 						<div class="form-group col-md-6"> -->
-<!-- 							<label for="bairro">Bairro</label> <input type="text" -->
-<!-- 								class="form-control" id="bairro" name="bairro" value="" /> -->
-<!-- 							<div class="invalid-feedback"></div> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group col-md-6"> -->
-<!-- 							<label for="cep">Cep</label> <input type="text" -->
-<!-- 								class="form-control" id="cep" data-mask="00000-000" name="cep" -->
-<!-- 								value="" /> -->
-<!-- 							<div class="invalid-feedback"></div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
 
-<!-- 					<div class="form-row"> -->
-<!-- 						<div class="form-group col-md-6"> -->
-<!-- 							<label for="email">Email</label> <input type="text" -->
-<!-- 								class="form-control" id="email" name="email" value="" /> -->
-<!-- 							<div class="invalid-feedback"></div> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group col-md-6"> -->
-<!-- 							<label for="senha">Senha</label> <input type="text" -->
-<!-- 								class="form-control" id="senha" name="senha" value="" /> -->
-<!-- 							<div class="invalid-feedback"></div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-
-<!-- 					<input type="hidden" id="id" th:field="*{id}" value="" /> -->
-<!-- 					<button type="submit" class="btn btn-primary btn-sm">Salvar</button> -->
-<!-- 				</form> -->
-		</div>
-	</section>
+			<!-- Nav Item - Pacientes Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsedPaciente"
+				href="#" data-toggle="collapse" data-target="#collapsePaciente"
+				aria-expanded="true" aria-controls="collapsePaciente"> <i
+					class="fas fa-fw fa-portrait"></i> <span>Pacientes</span>
+			</a>
+				<div id="collapsePaciente" class="collapse"
+					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">A√ß√µes Paciente:</h6>
+						<a class="collapse-item" href="CadastrarPaciente.html">Cadastrar</a>
+						<a class="collapse-item" href="ListarUsuariosPacientes.html">Listar
+							Pacientes</a>
+					</div>
+				</div></li>
 
 
+			<!-- Divider -->
+			<hr class="sidebar-divider">
+
+			<!-- Heading -->
+			<div class="sidebar-heading">Interface</div>
+
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseTwo"
+				aria-expanded="true" aria-controls="collapseTwo"> <i
+					class="fas fa-fw fa-cog"></i> <span>Components</span>
+			</a>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Custom Components:</h6>
+						<a class="collapse-item" href="buttons.html">Buttons</a> <a
+							class="collapse-item" href="cards.html">Cards</a>
+					</div>
+				</div></li>
+
+			<!-- Nav Item - Utilities Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseUtilities"
+				aria-expanded="true" aria-controls="collapseUtilities"> <i
+					class="fas fa-fw fa-wrench"></i> <span>Utilities</span>
+			</a>
+				<div id="collapseUtilities" class="collapse"
+					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Custom Utilities:</h6>
+						<a class="collapse-item" href="utilities-color.html">Colors</a> <a
+							class="collapse-item" href="utilities-border.html">Borders</a> <a
+							class="collapse-item" href="utilities-animation.html">Animations</a>
+						<a class="collapse-item" href="utilities-other.html">Other</a>
+					</div>
+				</div></li>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider">
+
+			<!-- Heading -->
+			<div class="sidebar-heading">Addons</div>
+
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapsePages"
+				aria-expanded="true" aria-controls="collapsePages"> <i
+					class="fas fa-fw fa-folder"></i> <span>Pages</span>
+			</a>
+				<div id="collapsePages" class="collapse"
+					aria-labelledby="headingPages" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Login Screens:</h6>
+						<a class="collapse-item" href="/login">Login</a> <a
+							class="collapse-item" href="register.html">Register</a> <a
+							class="collapse-item" href="forgot-password.html">Forgot
+							Password</a>
+						<div class="collapse-divider"></div>
+						<h6 class="collapse-header">Other Pages:</h6>
+						<a class="collapse-item" href="404.html">404 Page</a> <a
+							class="collapse-item" href="blank.html">Blank Page</a>
+					</div>
+				</div></li>
+
+
+			<!-- Nav Item - Charts -->
+			<li class="nav-item"><a class="nav-link" href="charts.html">
+					<i class="fas fa-fw fa-chart-area"></i> <span>Charts</span>
+			</a></li>
+
+			<!-- Nav Item - Tables -->
+			<li class="nav-item"><a class="nav-link" href="tables.html">
+					<i class="fas fa-fw fa-table"></i> <span>Tables</span>
+			</a></li>
+
+
+
+			<!-- Divider -->
+			<hr class="sidebar-divider d-none d-md-block">
+		</ul>
+	</div>
+	
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="vendor/chart.js/Chart.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="js/demo/chart-area-demo.js"></script>
+	<script src="js/demo/chart-pie-demo.js"></script>
+	
 </body>
+
 </html>
 
 
-<script>
-	function validacaoDeCPF() {
-		let cpf = document.getElementById("cpf").value;
-		console.log(cpf)
-		if (typeof cpf !== "string") return false
-		cpf = cpf.replace(/[\s.-]*/igm, '')
-		if (cpf.length !== 11 || !Array.from(cpf).filter(e => e !== cpf[0]).length) {
-			document.getElementById("retornoFalse").innerHTML = "CPF inv·lido";
-			return false
-		}
-		var soma = 0
-		var resto
-		for (var i = 1; i <= 9; i++)
-			soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i)
-		resto = (soma * 10) % 11
-		if ((resto === 10) || (resto === 11))  resto = 0
-		if (resto !== parseInt(cpf.substring(9, 10)) ) return false
-		soma = 0
-		for (var i = 1; i <= 10; i++)
-			soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i)
-		resto = (soma * 10) % 11
-		if ((resto === 10) || (resto === 11))  resto = 0
-		if (resto !== parseInt(cpf.substring(10, 11) ) ) return false
-		document.getElementById("retornoFalse").innerHTML = "";
-		return true
-	}
-</script>
+<!-- <title>P√°gina de Cadastro de Funcion√°rios</title> -->
+
+<!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" -->
+<!-- 	type="text/css"> -->
+<!-- <link -->
+<!-- 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" -->
+<!-- 	rel="stylesheet"> -->
+
+<!-- <!-- Custom styles for this template--> -->
+<!-- <link href="css/sb-admin-2.min.css" rel="stylesheet"> -->
+
+<!-- </head> -->
+<!-- <body> -->
+<!-- 	<section class="layout-content" layout:fragment="corpo"> -->
+<!-- 		<div class="page-header"> -->
+<!-- 			<nav class="navbar navbar-expand-md navbar-top bg-light"> -->
+<!-- 				<div class="collapse navbar-collapse" id="navbarsExampleDefault"> -->
+<!-- 					<ul class="navbar-nav"> -->
+<!-- 						<li class="nav-item active"><i class="oi oi-caret-right"></i> -->
+<!-- 							<span>Cadastrar Funcion√°rio</span></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 				<a class="btn btn-primary btn-md" -->
+<!-- 					href="/administrativo/funcionarios/listar" role="button"> <span -->
+<!-- 					class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span> -->
+<!-- 					<span>Listar Funcion√°rios</span> -->
+<!-- 				</a> -->
+<!-- 			</nav> -->
+<!-- 		</div> -->
+
+<!-- 		<div class="container" id="cadastro"></div> -->
+<!-- 			<form action="/administrativo/funcionarios/salvar" -->
+<!-- 				th:object="${funcionario}" method="POST"></form> -->
+<!-- 				<form onsubmit="return validacaoDeCPF()" -->
+<!-- 					action="/administrativo/funcionarios/salvar" -->
+<!-- 					th:object="${funcionario}" method="POST"> -->
+<!-- 					<div class="form-row"> -->
+<!-- 						<div class="form-group col-md-6"> -->
+<!-- 							<label for="nome">Nome do Funcion√°rio</label> <input type="text" -->
+<!-- 								class="form-control" id="nome" placeholder="Nome Completo" -->
+<!-- 								autofocus="autofocus" th:field="*{nome}" value="" /> -->
+<!-- 							<div class="invalid-feedback"></div> -->
+<!-- 						</div> -->
+
+<!-- 						<div class="form-group col-md-4"> -->
+<!-- 							<label for="cpf">CPF</label> <input type="text" -->
+<!-- 								class="form-control cpf-mask" -->
+<!-- 								onblur="if (this.value !== '') {validacaoDeCPF()}" -->
+<!-- 								placeholder="Insira apenas os n√∫meros do CPF" -->
+<!-- 								data-mask="000.000.000-00" id="cpf" name="cpf" th:field="*{cpf}" -->
+<!-- 								maxlength="14" value="" /> <span -->
+<!-- 								class="font-weight-bold text-danger" role="alert" -->
+<!-- 								id="retornoFalse"></span> <span -->
+<!-- 								class="font-weight-bold text-success" role="alert" -->
+<!-- 								id="retornoTrue"></span> -->
+<!-- 						</div> -->
+						
+<!-- 						<div class="form-group col-md-4"> -->
+<!-- 							<label for="rg">RG</label> <input type="text" -->
+<!-- 								class="form-control rg-mask" -->
+<!-- 								placeholder="Insira apenas os n√∫meros do RG" -->
+<!-- 								id="rg" name="rg" th:field="*{rg}" -->
+<!-- 								value="" /> <span -->
+<!-- 								class="font-weight-bold text-danger" role="alert" -->
+<!-- 								id="retornoFalse"></span> <span -->
+<!-- 								class="font-weight-bold text-success" role="alert" -->
+<!-- 								id="retornoTrue"></span> -->
+<!-- 						</div> -->
+
+<!-- <!-- 						<div class="form-group col-md-6"> --> -->
+<!-- <!-- 							<label for="salario">Sal√°rio Bruto</label> <input type="text" --> -->
+<!-- <!-- 								class="form-control" id="salario" data-mask="#.###,00" --> -->
+<!-- <!-- 								data-mask-reverse="true" th:field="*{salarioBruto}" value="" /> --> -->
+<!-- <!-- 							<div class="invalid-feedback"></div> --> -->
+<!-- <!-- 						</div> --> -->
+<!-- <!-- 					</div> --> -->
+<!-- <!-- 					<div class="form-row"> --> -->
+<!-- <!-- 						<div class="form-group col-md-6"> --> -->
+<!-- <!-- 							<label for="cargo">Cargo</label> <select id="cargo" --> -->
+<!-- <!-- 								class="form-control" name="cargo"> --> -->
+<!-- <!-- 								<option value="">Selecione...</option> --> -->
+<!-- <!-- 								<option value="1">Auxiliar Cont√°bil</option> --> -->
+<!-- <!-- 								<option value="2">Auxiliar Administrativo</option> --> -->
+<!-- <!-- 								<option value="3">Contador</option> --> -->
+<!-- <!-- 								<option value="4">Adminitrador</option> --> -->
+<!-- <!-- 							</select> --> -->
+<!-- <!-- 							<div class="invalid-feedback"></div> --> -->
+<!-- <!-- 						</div> --> -->
+<!-- <!-- 					</div> --> -->
+<!-- <!-- 					<div class="form-row"> --> -->
+<!-- <!-- 						<div class="form-group col-md-6"> --> -->
+<!-- <!-- 							<label for="cidade">Cidade</label> <select th:field="*{cidade}" --> -->
+<!-- <!-- 								class="form-control"> --> -->
+<!-- <!-- 								<option th:each="cid: ${listaCidades}" th:value="${cid.id}" --> -->
+<!-- <!-- 									th:text="${cid.nome}"></option> --> -->
+<!-- <!-- 							</select> --> -->
+
+
+<!-- <!-- 							<div class="invalid-feedback"></div> --> -->
+<!-- <!-- 						</div> --> -->
+<!-- <!-- 						<div class="form-group col-md-6"> --> -->
+<!-- <!-- 							<label for="logradouro">Logradouro</label> <input type="text" --> -->
+<!-- <!-- 								class="form-control" id="logradouro" --> -->
+<!-- <!-- 								placeholder="logradouro sem n√∫mero" name="logradouro" value="" /> --> -->
+<!-- <!-- 							<div class="invalid-feedback"></div> --> -->
+<!-- <!-- 						</div> --> -->
+<!-- <!-- 					</div> --> -->
+<!-- <!-- 					<div class="form-row"> --> -->
+<!-- <!-- 						<div class="form-group col-md-6"> --> -->
+<!-- <!-- 							<label for="numero">N√∫mero</label> <input type="text" --> -->
+<!-- <!-- 								class="form-control" id="numero" name="numero" value="" /> --> -->
+<!-- <!-- 							<div class="invalid-feedback"></div> --> -->
+<!-- <!-- 						</div> --> -->
+<!-- <!-- 						<div class="form-group col-md-6"> --> -->
+<!-- <!-- 							<label for="complemento">Complemento</label> <input type="text" --> -->
+<!-- <!-- 								class="form-control" id="complemento" --> -->
+<!-- <!-- 								placeholder="fundos, casa, AP. 102, .." name="complemento" --> -->
+<!-- <!-- 								value="" /> --> -->
+<!-- <!-- 							<div class="invalid-feedback"></div> --> -->
+<!-- <!-- 						</div> --> -->
+<!-- <!-- 					</div> --> -->
+<!-- <!-- 					<div class="form-row"> --> -->
+<!-- <!-- 						<div class="form-group col-md-6"> --> -->
+<!-- <!-- 							<label for="bairro">Bairro</label> <input type="text" --> -->
+<!-- <!-- 								class="form-control" id="bairro" name="bairro" value="" /> --> -->
+<!-- <!-- 							<div class="invalid-feedback"></div> --> -->
+<!-- <!-- 						</div> --> -->
+<!-- <!-- 						<div class="form-group col-md-6"> --> -->
+<!-- <!-- 							<label for="cep">Cep</label> <input type="text" --> -->
+<!-- <!-- 								class="form-control" id="cep" data-mask="00000-000" name="cep" --> -->
+<!-- <!-- 								value="" /> --> -->
+<!-- <!-- 							<div class="invalid-feedback"></div> --> -->
+<!-- <!-- 						</div> --> -->
+<!-- <!-- 					</div> --> -->
+
+<!-- <!-- 					<div class="form-row"> --> -->
+<!-- <!-- 						<div class="form-group col-md-6"> --> -->
+<!-- <!-- 							<label for="email">Email</label> <input type="text" --> -->
+<!-- <!-- 								class="form-control" id="email" name="email" value="" /> --> -->
+<!-- <!-- 							<div class="invalid-feedback"></div> --> -->
+<!-- <!-- 						</div> --> -->
+<!-- <!-- 						<div class="form-group col-md-6"> --> -->
+<!-- <!-- 							<label for="senha">Senha</label> <input type="text" --> -->
+<!-- <!-- 								class="form-control" id="senha" name="senha" value="" /> --> -->
+<!-- <!-- 							<div class="invalid-feedback"></div> --> -->
+<!-- <!-- 						</div> --> -->
+<!-- <!-- 					</div> --> -->
+
+<!-- <!-- 					<input type="hidden" id="id" th:field="*{id}" value="" /> --> -->
+<!-- <!-- 					<button type="submit" class="btn btn-primary btn-sm">Salvar</button> --> -->
+<!-- <!-- 				</form> --> -->
+<!-- 		</div> -->
+<!-- 	</section> -->
+
+
+<!-- </body> -->
+<!-- </html> -->
+
+
+<!-- <script> -->
+// 	function validacaoDeCPF() {
+// 		let cpf = document.getElementById("cpf").value;
+// 		console.log(cpf)
+// 		if (typeof cpf !== "string") return false
+// 		cpf = cpf.replace(/[\s.-]*/igm, '')
+// 		if (cpf.length !== 11 || !Array.from(cpf).filter(e => e !== cpf[0]).length) {
+// 			document.getElementById("retornoFalse").innerHTML = "CPF inv√°lido";
+// 			return false
+// 		}
+// 		var soma = 0
+// 		var resto
+// 		for (var i = 1; i <= 9; i++)
+// 			soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i)
+// 		resto = (soma * 10) % 11
+// 		if ((resto === 10) || (resto === 11))  resto = 0
+// 		if (resto !== parseInt(cpf.substring(9, 10)) ) return false
+// 		soma = 0
+// 		for (var i = 1; i <= 10; i++)
+// 			soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i)
+// 		resto = (soma * 10) % 11
+// 		if ((resto === 10) || (resto === 11))  resto = 0
+// 		if (resto !== parseInt(cpf.substring(10, 11) ) ) return false
+// 		document.getElementById("retornoFalse").innerHTML = "";
+// 		return true
+// 	}
+<!-- </script> -->

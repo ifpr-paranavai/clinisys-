@@ -16,4 +16,9 @@ public class PrincipalControle {
 	public String acessarLogin() {
 		return "/login";
 	}
+	
+	@GetMapping("/recuperar-senha")
+	public String esqueceuSenha() {
+		return "/forgot-password.html";
+	}
 }
