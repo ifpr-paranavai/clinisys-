@@ -17,6 +17,11 @@ public class PrincipalControle {
 		return "/login";
 	}
 	
+	@GetMapping("/layout")
+	public String acessarLayout() {
+		return "/administrativo/fragments/layout";
+	}
+	
 	@GetMapping("/recuperar-senha")
 	public String esqueceuSenha() {
 		return "/forgot-password.html";

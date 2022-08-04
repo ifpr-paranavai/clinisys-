@@ -20,7 +20,7 @@ public class FuncionarioControle {
 	
 	@GetMapping("/administrativo/funcionarios/cadastrar")
 	public ModelAndView cadastrar(Funcionario funcionario) {
-		ModelAndView mv = new ModelAndView("/administrativo/funcionarios/cadastro");
+		ModelAndView mv = new ModelAndView("administrativo/funcionarios/cadastro2");
 		mv.addObject("funcionario", funcionario);
 		return mv;
 	}
