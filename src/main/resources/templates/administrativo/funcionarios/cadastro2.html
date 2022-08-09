@@ -2,9 +2,39 @@
 <html lang="pt-br"
 	xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{/administrativo/fragments/layout}">
 <head>
+
 	<meta charset="utf-8"/>
 	<title> Página de Cadastro de Funcionários</title>
+	
+	<script>
+		function validacaoDeCPF() {
+			let cpf = document.getElementById("cpf").value;
+			console.log(cpf)
+			if (typeof cpf !== "string") return false
+			cpf = cpf.replace(/[\s.-]*/igm, '')
+			if (cpf.length !== 11 || !Array.from(cpf).filter(e => e !== cpf[0]).length) {
+				document.getElementById("retornoFalse").innerHTML = "CPF informado é inválido";
+				return false
+			}
+			var soma = 0
+			var resto
+			for (var i = 1; i <= 9; i++)
+				soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i)
+			resto = (soma * 10) % 11
+			if ((resto === 10) || (resto === 11))  resto = 0
+			if (resto !== parseInt(cpf.substring(9, 10)) ) return false
+			soma = 0
+			for (var i = 1; i <= 10; i++)
+				soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i)
+			resto = (soma * 10) % 11
+			if ((resto === 10) || (resto === 11))  resto = 0
+			if (resto !== parseInt(cpf.substring(10, 11) ) ) return false
+			document.getElementById("retornoFalse").innerHTML = "";
+			return true
+		}
+	</script>
 
+	
 </head>
 
 <body>
@@ -14,9 +44,109 @@
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
 			<h1 class="h3 mb-0 text-gray-800">Cadastro de Funcionário</h1>
 		</div>
-		<p> Teste pakodokiashjiduhasiukdnaskjghdaskiodju </p>
+		
+		<div class="page-header">
+			<nav class="navbar navbar-expand-md navbar-top bg-light">
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				</div>
+				<a class="btn btn-primary btn-md"
+					href="/administrativo/funcionarios/listar" role="button"> <span
+					class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
+					<span>Listar Funcionários</span>
+				</a>
+			</nav>
+		</div>
+
+		<div class="container" id="cadastro"></div>
+			<form action="/administrativo/funcionarios/salvar"
+				th:object="${funcionario}" method="POST"></form>
+				<form onsubmit="return validacaoDeCPF()"
+					action="/administrativo/funcionarios/salvar"
+					th:object="${funcionario}" method="POST">
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="nome">Nome do Funcionário</label> <input type="text"
+								class="form-control" id="nome" placeholder="Nome Completo"
+								autofocus="autofocus" th:field="*{nome}" value="" />
+							<div class="invalid-feedback"></div>
+						</div>
+
+						<div class="form-group col-md-4">
+							<label for="cpf">CPF</label> <input type="text"
+								class="form-control cpf-mask"
+								onblur="if (this.value !== '') {validacaoDeCPF()}"
+								placeholder="Insira apenas os números do CPF" 
+								data-mask="###.###.###-##" id="cpf" name="cpf" th:field="*{cpf}"
+								maxlength="14" value=""	
+								autocomplete="off"/> <span
+								class="font-weight-bold text-danger" role="alert"
+								id="retornoFalse"></span> <span
+								class="font-weight-bold text-success" role="alert"
+								id="retornoTrue"></span>
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label for="rg">RG</label> <input type="text"
+								class="form-control rg-mask"
+								placeholder="Insira apenas os números do RG"
+								id="rg" name="rg" th:field="*{rg}"
+								value="" /> <span
+								class="font-weight-bold text-danger" role="alert"
+								id="retornoFalse"></span> <span
+								class="font-weight-bold text-success" role="alert"
+								id="retornoTrue"></span>
+						</div>
+						
+					</div>
+					
+					<input type="hidden" id="id" th:field="*{id}" value="" /> 
+ 					<button type="submit" class="btn btn-primary btn-sm">Salvar</button> 
+				</form>
+						
 	</section>
 
 </body>
 
 </html>
+
+
+<!--  Máscara para o CPF -->
+<script type="text/javascript">
+	
+	function mask(o, f){
+		v_obj = o
+		v_fun = f
+		setTimeout("execmask()", 1)
+	}
+	
+	
+	function execmask(){
+		v_obj.value=v_fun(v_obj.value)
+	}
+	
+	function maskcpf(v){
+		v = v.replace(/\D/g,"");
+		v = v.replace(/(\d{3})(\d)/, "$1.$2");
+		v = v.replace(/(\d{3})(\d)/, "$1.$2");
+		v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+		return v;
+	}
+	
+	function idcss(el){
+		return document.getElementById(el);
+	}
+	
+	window.onload = function(){
+		
+		idcss('cpf').setAttribute('maxlength', 14);
+		idcss('cpf').onkeypress = function(){
+			mask(this, maskcpf);	
+		}
+		
+	}
+	
+</script>
+
+
+
+        
