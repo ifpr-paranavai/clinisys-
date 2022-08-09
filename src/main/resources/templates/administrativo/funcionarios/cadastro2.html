@@ -5,34 +5,6 @@
 
 	<meta charset="utf-8"/>
 	<title> Página de Cadastro de Funcionários</title>
-	
-	<script>
-		function validacaoDeCPF() {
-			let cpf = document.getElementById("cpf").value;
-			console.log(cpf)
-			if (typeof cpf !== "string") return false
-			cpf = cpf.replace(/[\s.-]*/igm, '')
-			if (cpf.length !== 11 || !Array.from(cpf).filter(e => e !== cpf[0]).length) {
-				document.getElementById("retornoFalse").innerHTML = "CPF informado é inválido";
-				return false
-			}
-			var soma = 0
-			var resto
-			for (var i = 1; i <= 9; i++)
-				soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i)
-			resto = (soma * 10) % 11
-			if ((resto === 10) || (resto === 11))  resto = 0
-			if (resto !== parseInt(cpf.substring(9, 10)) ) return false
-			soma = 0
-			for (var i = 1; i <= 10; i++)
-				soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i)
-			resto = (soma * 10) % 11
-			if ((resto === 10) || (resto === 11))  resto = 0
-			if (resto !== parseInt(cpf.substring(10, 11) ) ) return false
-			document.getElementById("retornoFalse").innerHTML = "";
-			return true
-		}
-	</script>
 
 	
 </head>
@@ -70,8 +42,24 @@
 								autofocus="autofocus" th:field="*{nome}" value="" />
 							<div class="invalid-feedback"></div>
 						</div>
-
+						
 						<div class="form-group col-md-4">
+							<label for="datanascimento">Data de nascimento</label> <input type="text"
+								onblur="if (this.value !== '') {validarData()}"
+								class="form-control" id="data" placeholder="Insira apenas os números da data de nascimento"
+								autofocus="autofocus" th:field="*{dataNascimento}"
+								data-mask="00/00/0000"
+								maxlength="10"
+								value="" 
+								autocomplete="off"/><span
+								class="font-weight-bold text-danger" role="alert"
+								id="retornoDataFalse"></span> <span
+								class="font-weight-bold text-success" role="alert"
+								id="retornoDataTrue"></span>
+							<div class="invalid-feedback"></div>
+						</div>
+
+						<div class="form-group col-md-5">
 							<label for="cpf">CPF</label> <input type="text"
 								class="form-control cpf-mask"
 								onblur="if (this.value !== '') {validacaoDeCPF()}"
@@ -85,7 +73,7 @@
 								id="retornoTrue"></span>
 						</div>
 						
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-5">
 							<label for="rg">RG</label> <input type="text"
 								class="form-control rg-mask"
 								placeholder="Insira apenas os números do RG"
@@ -96,6 +84,10 @@
 								class="font-weight-bold text-success" role="alert"
 								id="retornoTrue"></span>
 						</div>
+						
+						
+						
+						
 						
 					</div>
 					
@@ -110,42 +102,9 @@
 </html>
 
 
-<!--  Máscara para o CPF -->
-<script type="text/javascript">
-	
-	function mask(o, f){
-		v_obj = o
-		v_fun = f
-		setTimeout("execmask()", 1)
-	}
-	
-	
-	function execmask(){
-		v_obj.value=v_fun(v_obj.value)
-	}
-	
-	function maskcpf(v){
-		v = v.replace(/\D/g,"");
-		v = v.replace(/(\d{3})(\d)/, "$1.$2");
-		v = v.replace(/(\d{3})(\d)/, "$1.$2");
-		v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-		return v;
-	}
-	
-	function idcss(el){
-		return document.getElementById(el);
-	}
-	
-	window.onload = function(){
-		
-		idcss('cpf').setAttribute('maxlength', 14);
-		idcss('cpf').onkeypress = function(){
-			mask(this, maskcpf);	
-		}
-		
-	}
-	
-</script>
+
+
+
 
 
 

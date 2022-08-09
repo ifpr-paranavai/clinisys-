@@ -26,6 +26,95 @@
 <!-- Custom styles for this template-->
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
+<!--  Máscara para o CPF, DATA -->
+<script type="text/javascript">
+	
+	function mask(o, f){
+		v_obj = o
+		v_fun = f
+		setTimeout("execmask()", 1)
+	}
+	
+	
+	function execmask(){
+		v_obj.value=v_fun(v_obj.value)
+	}
+	
+	function maskcpf(v){
+		v = v.replace(/\D/g,"");
+		v = v.replace(/(\d{3})(\d)/, "$1.$2");
+		v = v.replace(/(\d{3})(\d)/, "$1.$2");
+		v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+		return v;
+	}
+	
+	function maskdata(v){
+		v = v.replace(/\D/g,"");
+		v = v.replace(/(\d{2})(\d)/, "$1/$2");
+		v = v.replace(/(\d{2})(\d)/, "$1/$2");
+		return v;
+	}
+	
+	function idcss(el){
+		return document.getElementById(el);
+	}
+	
+	window.onload = function(){
+		
+		idcss('cpf').setAttribute('maxlength', 14);
+		idcss('cpf').onkeypress = function(){
+			mask(this, maskcpf);	
+		}
+		idcss('data').setAttribute('maxlength', 10);
+		idcss('data').onkeypress = function(){
+			mask(this, maskdata);	
+		}
+		
+	}
+	
+</script>
+
+<!-- Validação de CPF -->
+<script>
+		function validacaoDeCPF() {
+			let cpf = document.getElementById("cpf").value;
+			if (typeof cpf !== "string") return false
+			cpf = cpf.replace(/[\s.-]*/igm, '')
+			if (cpf.length !== 11 || !Array.from(cpf).filter(e => e !== cpf[0]).length) {
+				document.getElementById("retornoFalse").innerHTML = "CPF informado é inválido";
+				return false
+			}
+			var soma = 0
+			var resto
+			for (var i = 1; i <= 9; i++)
+				soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i)
+			resto = (soma * 10) % 11
+			if ((resto === 10) || (resto === 11))  resto = 0
+			if (resto !== parseInt(cpf.substring(9, 10)) ) return false
+			soma = 0
+			for (var i = 1; i <= 10; i++)
+				soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i)
+			resto = (soma * 10) % 11
+			if ((resto === 10) || (resto === 11))  resto = 0
+			if (resto !== parseInt(cpf.substring(10, 11) ) ) return false
+			document.getElementById("retornoFalse").innerHTML = "";
+			return true
+		}
+		
+		function validarData(){
+			var date_regex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+			let data = document.getElementById("data").value;
+			if(data && date_regex.test(data)){
+				document.getElementById("retornoDataFalse").innerHTML = " ";
+				return true
+			}else{
+				document.getElementById("retornoDataFalse").innerHTML = "Data inválida";
+				return false
+			}
+		}
+</script>
+
+
 </head>
 
 <body id="page-top">
