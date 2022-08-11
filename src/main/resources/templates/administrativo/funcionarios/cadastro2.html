@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt-br"
-	xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{/administrativo/fragments/layout}">
+<html lang="pt-br" xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{/administrativo/fragments/layout}">
 <head>
 
-	<meta charset="utf-8"/>
-	<title> Página de Cadastro de Funcionários</title>
+<meta charset="utf-8" />
+<title>Página de Cadastro de Funcionários</title>
 
-	
+
 </head>
 
 <body>
 
 	<section class="container-fluid" layout:fragment="conteudo">
-	
+
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
-			<h1 class="h3 mb-0 text-gray-800">Cadastro de Funcionário</h1>
+			<h1 class="h3 mb-0 text-gray-800"><u><b>Cadastro de Funcionário</b></u></h1>
 		</div>
-		
+
 		<div class="page-header">
 			<nav class="navbar navbar-expand-md navbar-top bg-light">
 				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -30,71 +30,118 @@
 		</div>
 
 		<div class="container" id="cadastro"></div>
-			<form action="/administrativo/funcionarios/salvar"
-				th:object="${funcionario}" method="POST"></form>
-				<form onsubmit="return validacaoDeCPF()"
-					action="/administrativo/funcionarios/salvar"
-					th:object="${funcionario}" method="POST">
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label for="nome">Nome do Funcionário</label> <input type="text"
-								class="form-control" id="nome" placeholder="Nome Completo"
-								autofocus="autofocus" th:field="*{nome}" value="" />
-							<div class="invalid-feedback"></div>
-						</div>
-						
-						<div class="form-group col-md-4">
-							<label for="datanascimento">Data de nascimento</label> <input type="text"
-								onblur="if (this.value !== '') {validarData()}"
-								class="form-control" id="data" placeholder="Insira apenas os números da data de nascimento"
-								autofocus="autofocus" th:field="*{dataNascimento}"
-								data-mask="00/00/0000"
-								maxlength="10"
-								value="" 
-								autocomplete="off"/><span
-								class="font-weight-bold text-danger" role="alert"
-								id="retornoDataFalse"></span> <span
-								class="font-weight-bold text-success" role="alert"
-								id="retornoDataTrue"></span>
-							<div class="invalid-feedback"></div>
-						</div>
+		<form action="/administrativo/funcionarios/salvar"
+			th:object="${funcionario}" method="POST"></form>
+		<form onsubmit="return validacaoDeCPF"
+			action="/administrativo/funcionarios/salvar"
+			th:object="${funcionario}" method="POST">
+			<div class="form-row">
+				<div class="form-group col-md-10">
+					<label for="nome">Nome do Funcionário</label> <input type="text"
+						class="form-control" id="nome" placeholder="Nome Completo"
+						autofocus="autofocus" th:field="*{nome}" value="" />
+					<div class="invalid-feedback"></div>
+				</div>
 
-						<div class="form-group col-md-5">
-							<label for="cpf">CPF</label> <input type="text"
-								class="form-control cpf-mask"
-								onblur="if (this.value !== '') {validacaoDeCPF()}"
-								placeholder="Insira apenas os números do CPF" 
-								data-mask="###.###.###-##" id="cpf" name="cpf" th:field="*{cpf}"
-								maxlength="14" value=""	
-								autocomplete="off"/> <span
-								class="font-weight-bold text-danger" role="alert"
-								id="retornoFalse"></span> <span
-								class="font-weight-bold text-success" role="alert"
-								id="retornoTrue"></span>
-						</div>
-						
-						<div class="form-group col-md-5">
-							<label for="rg">RG</label> <input type="text"
-								class="form-control rg-mask"
-								placeholder="Insira apenas os números do RG"
-								id="rg" name="rg" th:field="*{rg}"
-								value="" /> <span
-								class="font-weight-bold text-danger" role="alert"
-								id="retornoFalse"></span> <span
-								class="font-weight-bold text-success" role="alert"
-								id="retornoTrue"></span>
-						</div>
-						
-						
-						
-						
-						
-					</div>
-					
-					<input type="hidden" id="id" th:field="*{id}" value="" /> 
- 					<button type="submit" class="btn btn-primary btn-sm">Salvar</button> 
-				</form>
-						
+				<div class="form-group col-md-5">
+					<label for="datanascimento">Data de nascimento</label> <input
+						type="text" onblur="if (this.value !== '') {validarData()}"
+						class="form-control" id="data"
+						placeholder="Insira apenas os números da data de nascimento"
+						autofocus="autofocus" th:field="*{dataNascimento}"
+						data-mask="00/00/0000" maxlength="10" value="" autocomplete="off" /><span
+						class="font-weight-bold text-danger" role="alert"
+						id="retornoDataFalse"></span> <span
+						class="font-weight-bold text-success" role="alert"
+						id="retornoDataTrue"></span>
+					<div class="invalid-feedback"></div>
+				</div>
+
+				<div class="form-group col-md-5">
+					<label for="sexo">Sexo</label> <select id="sexo"
+						class="form-control" name="sexo">
+						<option value="">Selecione...</option>
+						<option value="1">Masculino</option>
+						<option value="2">Feminino</option>
+					</select>
+					<div class="invalid-feedback"></div>
+				</div>
+
+				<div class="form-group col-md-4">
+					<label for="cpf">CPF</label> <input type="text"
+						class="form-control cpf-mask"
+						onblur="if (this.value !== '') {validacaoDeCPF()}"
+						placeholder="Insira apenas os números do CPF"
+						data-mask="###.###.###-##" id="cpf" name="cpf" th:field="*{cpf}"
+						maxlength="14" value="" autocomplete="off" /> <span
+						class="font-weight-bold text-danger" role="alert"
+						id="retornoFalse"></span> <span
+						class="font-weight-bold text-success" role="alert"
+						id="retornoTrue"></span>
+				</div>
+
+				<div class="form-group col-md-4">
+					<label for="rg">RG</label> <input type="text"
+						class="form-control rg-mask"
+						onblur="if (this.value !== '') {mascaraRG()}"
+						placeholder="Insira apenas os números do RG" id="rg" name="rg"
+						th:field="*{rg}" value="" autocomplete="off" /> <span
+						class="font-weight-bold text-danger" role="alert"
+						id="retornoFalse"></span> <span
+						class="font-weight-bold text-success" role="alert"
+						id="retornoTrue"></span>
+				</div>
+				<div class="form-group col-md-2">
+					<label for="funcao">Função</label> <select id="funcao"
+						class="form-control" name="funcao">
+						<option value="">Selecione a função...</option>
+						<option value="1">Funcionário</option>
+						<option value="2">Terapeuta</option>
+					</select>
+					<div class="invalid-feedback"></div>
+				</div>
+
+				<div class="form-group col-md-10">
+					<label for="endereco">Endereço</label> <input type="text"
+						class="form-control"
+						placeholder="Informe o endereço, contendo nome da RUA, BAIRRO e NUMERAÇÂO"
+						id="endereco" name="endereco" th:field="*{endereco}" value=""
+						autocomplete="off" />
+				</div>
+
+				
+
+				<div class="form-group col-md-5">
+					<label for="email">Email</label><input type="text"
+						class="form-control"
+						onblur="if (this.value !== '') {validarEmail()}"
+						placeholder="Informe o email" th:field="*{email}" id="email"
+						name="email" value="" autocomplete="off" /><span
+						class="font-weight-bold text-danger" role="alert"
+						id="retornoEmailFalse"></span> <span
+						class="font-weight-bold text-success" role="alert"
+						id="retornoEmailTrue"></span>
+					<div class="invalid-feedback"></div>
+				</div>
+
+				<div class="form-group col-md-5">
+					<label for="senha">Senha</label> <input type="password"
+						class="form-control" id="senha" name="senha" value="" />
+					<div class="invalid-feedback"></div>
+				</div>
+
+
+
+
+
+			</div>
+
+			<input type="hidden" id="id" th:field="*{id}" value="" />
+			<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+
+
+		</form>
+
 	</section>
 
 </body>
@@ -108,4 +155,4 @@
 
 
 
-        
+

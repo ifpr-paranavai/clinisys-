@@ -55,6 +55,7 @@
 		return v;
 	}
 	
+	
 	function idcss(el){
 		return document.getElementById(el);
 	}
@@ -108,10 +109,26 @@
 				document.getElementById("retornoDataFalse").innerHTML = " ";
 				return true
 			}else{
-				document.getElementById("retornoDataFalse").innerHTML = "Data inválida";
+				document.getElementById("retornoDataFalse").innerHTML = "Data informada é inválida";
 				return false
 			}
 		}
+		
+		function validarEmail(){
+			var email_regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			let email = document.getElementById("email").value;
+			
+			if(email && email_regex.test(email)){
+				document.getElementById("retornoEmailFalse").innerHTML = "";
+				return true
+			}else{
+				document.getElementById("retornoEmailFalse").innerHTML = "Email informado é inválido";
+				return false
+			}
+			
+			
+		}
+		
 </script>
 
 
@@ -524,6 +541,10 @@
 	<!-- Page level custom scripts -->
 	<script src="/js/demo/chart-area-demo.js"></script>
 	<script src="/js/demo/chart-pie-demo.js"></script>
+	
+	<!--JQUERY 	  -->
+	<script src="hhttps://cdnjs.com/libraries/jquery.mask"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
 
 </body>
