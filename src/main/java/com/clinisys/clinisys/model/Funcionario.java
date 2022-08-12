@@ -1,6 +1,7 @@
 package com.clinisys.clinisys.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -27,8 +28,7 @@ public class Funcionario implements Serializable{
 	private String nome;
 	private String cpf;
 	private String rg;
-	@Temporal(TemporalType.DATE)
-	private Date dataNascimento;
+	private String dataNascimento;
 	private String endereco;
 	private String sexo;
 	private String funcao;
@@ -59,10 +59,11 @@ public class Funcionario implements Serializable{
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	public Date getDataNascimento() {
+	public String getDataNascimento() {
+		
 		return dataNascimento;
 	}
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public String getEndereco() {

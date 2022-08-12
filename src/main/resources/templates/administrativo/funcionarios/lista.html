@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html lang="pt-br"
-	xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{/administrativo/fragments/layout}">
+<html lang="pt-br" xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{/administrativo/fragments/layout}">
 <head>
-	<meta charset="utf-8"/>
-	<title> Página de Lista de Funcionários</title>
+<meta charset="utf-8" />
+<title>Página de Lista de Funcionários</title>
 
 </head>
 
 <body>
 
 	<section class="container-fluid" layout:fragment="conteudo">
-	
+
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
-			<h1 class="h3 mb-0 text-gray-800">Lista de Funcionários</h1>
+			<h1 class="h3 mb-0 text-gray-800"><u><b>Lista de Funcionários</b></u></h1>
 		</div>
 		<div class="page-header">
 			<nav class="navbar navbar-expand-md bg-light">
 				<div class="collapse navbar-collapse" id="navbarsExampleDefault"></div>
-					<a class="btn btn-primary btn-md"
-						href="/administrativo/funcionarios/cadastrar" role="button"> <span
-						class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> <span>Cadastrar Funcionários</span>
-					</a>		
+				<a class="btn btn-primary btn-md"
+					href="/administrativo/funcionarios/cadastrar" role="button"> <span
+					class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> <span>Cadastrar
+						Funcionários</span>
+				</a>
 			</nav>
 		</div>
 
@@ -28,12 +29,12 @@
 
 			<p>
 				<i class="oi oi-magnifying-glass"></i><span></span>
-				<button class="btn btn-primary" type="button" data-toggle="collapse"
+				<button class="btn btn-success" type="button" data-toggle="collapse"
 					data-target="#collapseNome" aria-controls="collapseNome">Nome</button>
-				<button class="btn btn-primary" type="button" data-toggle="collapse"
-					data-target="#collapseCargo" aria-controls="collapseCargo">Cargo</button>
-				<button class="btn btn-primary" type="button" data-toggle="collapse"
-					data-target="#collapseData" aria-controls="collapseData">Datas</button>
+				<button class="btn btn-success" type="button" data-toggle="collapse"
+					data-target="#collapseFuncao" aria-controls="collapseFuncao">Função</button>
+				<button class="btn btn-success" type="button" data-toggle="collapse"
+					data-target="#collapseCPF" aria-controls="collapseCPF">CPF</button>
 			</p>
 			<div class="row">
 				<div class="col">
@@ -43,8 +44,8 @@
 							<form class="form-inline" method="GET"
 								action="/funcionarios/buscar/nome">
 								<input class="form-control mr-sm-2" type="search"
-									placeholder="nome" aria-label="Search" name="nome" />
-								<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+									placeholder="Nome" aria-label="Search" name="nome" />
+								<button class="btn btn-outline-success my-2 my-sm-0">Pesquisar</button>
 							</form>
 						</nav>
 
@@ -61,10 +62,8 @@
 								<select class="form-control mr-sm-2" name="cargo"
 									aria-label="Search">
 									<option value="">Cargo</option>
-									<option value="1">Auxiliar Contábil</option>
-									<option value="2">Auxiliar Administrativo</option>
-									<option value="3">Contador</option>
-									<option value="4">Adminitrador</option>
+									<option value="1">Secretário</option>
+									<option value="2">Terapeuta</option>
 								</select>
 								<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
 							</form>
@@ -99,9 +98,7 @@
 						<tr>
 							<th>#</th>
 							<th>Nome</th>
-							<th>Cargo</th>
-							<th>Salário Bruto</th>
-							<th>Cidade</th>
+							<th>Função</th>
 							<th>Ação</th>
 						</tr>
 					</thead>
@@ -109,40 +106,37 @@
 						<tr th:each="funcionario : ${listaFuncionarios}">
 							<td th:text="${funcionario.id}"></td>
 							<td th:text="${funcionario.nome}"></td>
-							<td th:text="${funcionario.cargo}"></td>
-							<td th:text="${funcionario.salarioBruto}"></td>
-							<td th:text="${funcionario.cidade}"></td>
+							<td th:text="${funcionario.funcao}"></td>
 
 
-							<td colspan="2"><a class="btn btn-info btn-sm"
+							<td colspan="2"><a class="btn btn-warning btn-sm"
 								th:href="@{/administrativo/funcionarios/editar/{id}(id=${funcionario.id})}"
 								role="button"> <span class="oi oi-brush" title="Editar"
-									aria-hidden="true"></span>
-
-							</a> 
-							<a class="btn btn-info btn-sm" data-toggle="modal"
+									aria-hidden="true"></span>Editar</a> 
+								
+								<a class="btn btn-danger btn-sm" data-toggle="modal"
 								data-target="#modal-warning"
 								th:attr="data-target='#modal-warning'+${funcionario.id }"><span
-									class="oi oi-circle-x" title="Remover" aria-hidden="true"></span></a>
+									class="oi oi-circle-x" title="Remover" aria-hidden="true"></span>Excluir</a>
 
 								<div class="modal modal-warning fade in"
 									th:id="modal-warning+${funcionario.id}">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
+												<h5 class="modal-title">Remover Funcionário</h5>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close">
 													<span aria-hidden="true">×</span>
 												</button>
-												<h5 class="modal-title">Remover Funcionário</h5>
 											</div>
 											<div class="modal-body">
 												<h3>Deseja realmente remover o funcionário?</h3>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-outline pull-left"
-													data-dismiss="modal">Fechar</button>
-												<a type="button" class="btn btn-outline"
+												<button type="button" class="btn btn-outline pull-left btn-danger"
+													data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Fechar</button>
+												<a type="button" class="btn btn-outline pull-left btn-success"
 													th:href="@{/administrativo/funcionarios/remover/{id}(id=${funcionario.id})}"><i
 													class="fa fa-check"></i>&nbsp;Sim</a>
 											</div>
@@ -154,9 +148,9 @@
 				</table>
 			</div>
 		</div>
-	
+
 	</section>
-	
+
 </body>
 
 </html>
