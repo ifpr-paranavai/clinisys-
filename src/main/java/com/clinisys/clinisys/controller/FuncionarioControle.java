@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.clinisys.clinisys.model.Funcionario;
+import com.clinisys.clinisys.repository.FuncaoRepositorio;
 import com.clinisys.clinisys.repository.FuncionarioRepositorio;
 
 
@@ -23,10 +24,14 @@ public class FuncionarioControle {
 	@Autowired
 	private FuncionarioRepositorio funcionarioRepositorio;
 	
+	@Autowired
+	private FuncaoRepositorio funcaoRepositorio;
+	
 	@GetMapping("/administrativo/funcionarios/cadastrar")
 	public ModelAndView cadastrar(Funcionario funcionario) {
 		ModelAndView mv = new ModelAndView("administrativo/funcionarios/cadastro");
 		mv.addObject("funcionario", funcionario);
+		mv.addObject("listaFuncoes", funcaoRepositorio.findAll());
 		return mv;
 	}
 		

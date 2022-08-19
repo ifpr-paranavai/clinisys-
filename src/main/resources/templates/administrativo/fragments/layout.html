@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br"
-	xmlns="http://www.w3.org/1999/xhtml" 
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
@@ -145,7 +144,9 @@
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+			<a
+				class="sidebar-brand d-flex align-items-center justify-content-center"
+				href="index.html">
 				<div class="sidebar-brand-icon rotate-n-15"></div>
 				<div class="h2 sidebar-brand-text mx-3">Clinisys</div>
 			</a>
@@ -155,8 +156,8 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active"><a class="nav-link"
-				href="/administrativo"> <i class="fas fa-fw fa-tachometer-alt" ></i> <span>Dashboard</span></a>
-			</li>
+				href="/administrativo"> <i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>Dashboard</span></a></li>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider">
@@ -174,8 +175,9 @@
 					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Ações Funcionário:</h6>
-						<a class="collapse-item" href="/administrativo/funcionarios/cadastrar">Cadastrar</a>
-						<a class="collapse-item" href="ListarUsuariosFuncionarios.html">Listar
+						<a class="collapse-item"
+							href="/administrativo/funcionarios/cadastrar">Cadastrar</a> <a
+							class="collapse-item" href="/administrativo/funcionarios/listar">Listar
 							Funcionários</a>
 					</div>
 				</div></li>
@@ -192,13 +194,14 @@
 					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Ações Paciente:</h6>
-						<a class="collapse-item" href="CadastrarPaciente.html">Cadastrar</a>
-						<a class="collapse-item" href="ListarUsuariosPacientes.html">Listar
+						<a class="collapse-item"
+							href="/administrativo/pecientes/cadastrar">Cadastrar</a> <a
+							class="collapse-item" href="/administrativo/pacientes/listar">Listar
 							Pacientes</a>
 					</div>
 				</div></li>
-				
-			
+
+
 			<!-- Nav Item - Fçõess Collapse Menu -->
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseFuncao"
@@ -209,9 +212,41 @@
 					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Ações Função:</h6>
-						<a class="collapse-item" href="CadastrarFuncao.html">Cadastrar</a>
-						<a class="collapse-item" href="ListarFuncoes.html">Listar
+						<a class="collapse-item" href="/administrativo/funcoes/cadastrar">Cadastrar</a>
+						<a class="collapse-item" href="/administrativo/funcoes/listar">Listar
 							Funções</a>
+					</div>
+				</div></li>
+
+			<!-- Nav Item - Estados Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseEstado"
+				aria-expanded="true" aria-controls="collapseEstado"> <i
+					class="fa fa fa-map"></i> <span>Estados</span>
+			</a>
+				<div id="collapseEstado" class="collapse"
+					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Ações Estado:</h6>
+						<a class="collapse-item" href="/administrativo/estados/cadastrar">Cadastrar</a>
+						<a class="collapse-item" href="/administrativo/estados/listar">Listar
+							Estados</a>
+					</div>
+				</div></li>
+
+			<!-- Nav Item - Cidades Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseCidade"
+				aria-expanded="true" aria-controls="collapseCidade"> <i
+					class="fa fa-map-marker"></i> <span>Cidades</span>
+			</a>
+				<div id="collapseCidade" class="collapse"
+					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Ações Cidade:</h6>
+						<a class="collapse-item" href="/administrativo/cidades/cadastrar">Cadastrar</a>
+						<a class="collapse-item" href="/administrativo/cidades/listar">Listar
+							Cidades</a>
 					</div>
 				</div></li>
 
@@ -463,7 +498,8 @@
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <span
-								class="mr-2 d-none d-lg-inline text-gray-600 small">Igor Luigi</span> <img class="img-profile rounded-circle"
+								class="mr-2 d-none d-lg-inline text-gray-600 small">Igor
+									Luigi</span> <img class="img-profile rounded-circle"
 								src="/img/undraw_profile.svg">
 						</a> <!-- Dropdown - User Information -->
 							<div
@@ -490,80 +526,80 @@
 
 				</nav>
 				<!-- End of Topbar -->
-				
+
 				<!-- Conteúdo da tela -->
 				<section class="container-fluid" layout:fragment="conteudo">
-					
-						
+
+
 				</section>
 				<!-- Final do Conteúdo -->
-				
+
 				<footer class="sticky-footer bg-white">
-				<div class="container my-auto">
-					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Your Website 2021</span>
+					<div class="container my-auto">
+						<div class="copyright text-center my-auto">
+							<span>Copyright &copy; Your Website 2021</span>
+						</div>
 					</div>
-				</div>
-			</footer>
-			<!-- End of Footer -->
+				</footer>
+				<!-- End of Footer -->
+
+			</div>
+			<!-- End of Content Wrapper -->
 
 		</div>
-		<!-- End of Content Wrapper -->
+		<!-- End of Page Wrapper -->
 
-	</div>
-	<!-- End of Page Wrapper -->
+		<!-- Scroll to Top Button-->
+		<a class="scroll-to-top rounded" href="#page-top"> <i
+			class="fas fa-angle-up"></i>
+		</a>
 
-	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top"> <i
-		class="fas fa-angle-up"></i>
-	</a>
-
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready
-					to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
+		<!-- Logout Modal-->
+		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Ready to
+							Leave?</h5>
+						<button class="close" type="button" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">Select "Logout" below if you are
+						ready to end your current session.</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button"
+							data-dismiss="modal">Cancel</button>
+						<a class="btn btn-primary" href="login.html">Logout</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	
-	
-	<!-- Bootstrap core JavaScript-->
-	<script src="/vendor/jquery/jquery.min.js"></script>
-	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	<!-- Core plugin JavaScript-->
-	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-	<!-- Custom scripts for all pages-->
-	<script src="/js/sb-admin-2.min.js"></script>
+		<!-- Bootstrap core JavaScript-->
+		<script src="/vendor/jquery/jquery.min.js"></script>
+		<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	<!-- Page level plugins -->
-	<script src="/vendor/chart.js/Chart.min.js"></script>
+		<!-- Core plugin JavaScript-->
+		<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-	<!-- Page level custom scripts -->
-	<script src="/js/demo/chart-area-demo.js"></script>
-	<script src="/js/demo/chart-pie-demo.js"></script>
-	
-	<!--JQUERY 	  -->
-	<script src="hhttps://cdnjs.com/libraries/jquery.mask"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
+		<!-- Custom scripts for all pages-->
+		<script src="/js/sb-admin-2.min.js"></script>
 
+		<!-- Page level plugins -->
+		<script src="/vendor/chart.js/Chart.min.js"></script>
+
+		<!-- Page level custom scripts -->
+		<script src="/js/demo/chart-area-demo.js"></script>
+		<script src="/js/demo/chart-pie-demo.js"></script>
+
+		<!--JQUERY 	  -->
+		<script src="hhttps://cdnjs.com/libraries/jquery.mask"></script>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 
 </html>

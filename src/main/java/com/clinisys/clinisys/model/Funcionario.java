@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -28,9 +29,10 @@ public class Funcionario implements Serializable{
 	private String dataNascimento;
 	private String endereco;
 	private String sexo;
-	private String funcao;
 	private String email;
 	private String senha;
+	@ManyToOne
+	private Funcao funcao; 
 	
 	public Long getId() {
 		return id;
@@ -75,12 +77,6 @@ public class Funcionario implements Serializable{
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	public String getFuncao() {
-		return funcao;
-	}
-	public void setFuncao(String funcao) {
-		this.funcao = funcao;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -96,8 +92,11 @@ public class Funcionario implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-	
-	
+	public Funcao getFuncao() {
+		return funcao;
+	}
+	public void setFuncao(Funcao funcao) {
+		this.funcao = funcao;
+	}
+
 }

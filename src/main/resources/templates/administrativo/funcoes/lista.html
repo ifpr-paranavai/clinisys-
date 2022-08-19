@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{/administrativo/fragments/layout}">
+<head>
+<meta charset="utf-8" />
+<title>Página de Lista de Funções</title>
+
+</head>
+
+<body>
+
+	<section class="container-fluid" layout:fragment="conteudo">
+
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800"><u><b>Lista de Funções</b></u></h1>
+		</div>
+		<div class="page-header">
+			<nav class="navbar navbar-expand-md bg-light">
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault"></div>
+				<a class="btn btn-primary btn-md"
+					href="/administrativo/funcoes/cadastrar" role="button"> <span
+					class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> <span>Cadastrar
+						Funções</span>
+				</a>
+			</nav>
+		</div>
+
+		<div class="container">
+
+			<p>
+				<i class="oi oi-magnifying-glass"></i><span></span>
+				<button class="btn btn-success" type="button" data-toggle="collapse"
+					data-target="#collapseNome" aria-controls="collapseNome">Nome da Função</button>
+			</p>
+			<div class="row">
+				<div class="col">
+					<div class="collapse" id="collapseNome">
+
+						<nav class="navbar navbar-light bg-light">
+							<form class="form-inline" method="GET"
+								action="/funcoes/buscar/nome">
+								<input class="form-control mr-sm-2" type="search"
+									placeholder="Nome da Função" aria-label="Search" name="nome" />
+								<button class="btn btn-outline-success my-2 my-sm-0">Pesquisar</button>
+							</form>
+						</nav>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="table-responsive">
+				<table class="table table-striped table-hover table-sm">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Função</th>
+							<th>Ação</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="funcao : ${listaFuncoes}">
+							<td th:text="${funcao.id}"></td>
+							<td th:text="${funcao.nome}"></td>
+
+
+							<td colspan="2"><a class="btn btn-warning btn-sm"
+								th:href="@{/administrativo/funcoes/editar/{id}(id=${funcao.id})}"
+								role="button"> <span class="oi oi-brush" title="Editar"
+									aria-hidden="true"></span>Editar</a> 
+								
+								<a class="btn btn-danger btn-sm" data-toggle="modal"
+								data-target="#modal-warning"
+								th:attr="data-target='#modal-warning'+${funcao.id }"><span
+									class="oi oi-circle-x" title="Remover" aria-hidden="true"></span>Excluir</a>
+
+								<div class="modal modal-warning fade in"
+									th:id="modal-warning+${funcao.id}">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">Remover Função</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<h3>Deseja realmente remover a função?</h3>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-outline pull-left btn-danger"
+													data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Fechar</button>
+												<a type="button" class="btn btn-outline pull-left btn-success"
+													th:href="@{/administrativo/funcoes/remover/{id}(id=${funcao.id})}"><i
+													class="fa fa-check"></i>&nbsp;Sim</a>
+											</div>
+										</div>
+									</div>
+								</div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</section>
+
+</body>
+
+</html>

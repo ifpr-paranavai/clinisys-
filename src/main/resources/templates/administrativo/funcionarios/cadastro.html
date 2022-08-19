@@ -90,15 +90,25 @@
 							class="font-weight-bold text-success" role="alert"
 							id="retornoTrue"></span>
 					</div>
+					
 					<div class="form-group col-md-2">
-						<label for="funcao">Função</label> <select id="funcao"
-							class="form-control" name="funcao" th:field="*{funcao}">
-							<option value="">Selecione a função...</option>
-							<option value="1">Funcionário</option>
-							<option value="2">Terapeuta</option>
-						</select>
-						<div class="invalid-feedback"></div>
+							<label for="funcao">Função</label> <select th:field="*{funcao}"
+								class="form-control">
+								<option th:each="func: ${listaFuncoes}" th:value="${func.id}"
+									th:text="${func.nome}"></option>
+							</select>
+							<div class="invalid-feedback"></div>
 					</div>
+					
+<!-- 					<div class="form-group col-md-2"> -->
+<!-- 						<label for="funcao">Função</label> <select id="funcao" -->
+<!-- 							class="form-control" name="funcao" th:field="*{funcao}"> -->
+<!-- 							<option value="">Selecione a função...</option> -->
+<!-- 							<option value="1">Funcionário</option> -->
+<!-- 							<option value="2">Terapeuta</option> -->
+<!-- 						</select> -->
+<!-- 						<div class="invalid-feedback"></div> -->
+<!-- 					</div> -->
 
 					<div class="form-group col-md-10">
 						<label for="endereco">Endereço</label> <input type="text"

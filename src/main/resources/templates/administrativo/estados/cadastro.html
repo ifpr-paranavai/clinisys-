@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{/administrativo/fragments/layout}">
+<head>
+
+<meta charset="utf-8" />
+<title>Página de Cadastro de Estados</title>
+
+
+</head>
+
+<body>
+
+	<section class="container-fluid" layout:fragment="conteudo">
+
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">
+				<u><b>Cadastro de Estados</b></u>
+			</h1>
+		</div>
+
+		<div class="page-header">
+			<nav class="navbar navbar-expand-md navbar-top bg-light">
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				</div>
+				<a class="btn btn-primary btn-md"
+					href="/administrativo/estados/listar" role="button"> <span
+					class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
+					<span>Listar Estados</span>
+				</a>
+			</nav>
+		</div>
+
+		<div class="container" id="cadastro"></div>
+		<form onsubmit="return validacaoDeCPF"
+			action="/administrativo/estados/salvar" th:object="${estado}"
+			method="POST">
+			<div class="form-row">
+				<div class="form-group col-md-5">
+					<label for="nome">Nome do Estado</label> <input type="text"
+						class="form-control" id="nomeestado"
+						placeholder="Nome do Estado" autofocus="autofocus"
+						th:field="*{nome}" value="" />
+					<div class="invalid-feedback"></div>
+				</div>
+				
+				<div class="form-group col-md-5">
+					<label for="nome">Sigla do Estado</label> <input type="text"
+						class="form-control" id="siglaestado"
+						placeholder="Sigla do Estado" autofocus="autofocus"
+						th:field="*{sigla}" value="" />
+					<div class="invalid-feedback"></div>
+				</div>
+				
+				<div  class="form-group col-md-10">
+					<button type="submit" class="btn btn-primary btn-sm float-right">Salvar</button>
+				</div>
+				
+			</div>
+
+			<input type="hidden" id="id" th:field="*{id}" value="" />
+			
+		</form>
+	</section>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
