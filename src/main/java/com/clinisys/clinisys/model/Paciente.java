@@ -1,15 +1,12 @@
 package com.clinisys.clinisys.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "paciente")
@@ -27,11 +24,9 @@ public class Paciente implements Serializable{
 	private String nome;
 	private String cpf;
 	private String rg;
-	@Temporal(TemporalType.DATE)
-	private Date dataNascimento;
+	private String dataNascimento;
 	private String endereco;
 	private String sexo;
-	private String funcao;
 	private String email;
 	private String senha;
 	
@@ -59,10 +54,10 @@ public class Paciente implements Serializable{
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	public Date getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public String getEndereco() {
@@ -76,12 +71,6 @@ public class Paciente implements Serializable{
 	}
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
-	}
-	public String getFuncao() {
-		return funcao;
-	}
-	public void setFuncao(String funcao) {
-		this.funcao = funcao;
 	}
 	public String getEmail() {
 		return email;

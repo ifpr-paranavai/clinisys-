@@ -3,7 +3,7 @@
 	layout:decorate="~{/administrativo/fragments/layout}">
 <head>
 <meta charset="utf-8" />
-<title>Página de Lista de Funcionários</title>
+<title>Página de Lista de Pacientes</title>
 
 </head>
 
@@ -12,15 +12,15 @@
 	<section class="container-fluid" layout:fragment="conteudo">
 
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
-			<h1 class="h3 mb-0 text-gray-800"><u><b>Lista de Funcionários</b></u></h1>
+			<h1 class="h3 mb-0 text-gray-800"><u><b>Lista de Pacientes</b></u></h1>
 		</div>
 		<div class="page-header">
 			<nav class="navbar navbar-expand-md bg-light">
 				<div class="collapse navbar-collapse" id="navbarsExampleDefault"></div>
 				<a class="btn btn-primary btn-md"
-					href="/administrativo/funcionarios/cadastrar" role="button"> <span
+					href="/paciente/pacientes/cadastrar" role="button"> <span
 					class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> <span>Cadastrar
-						Funcionários</span>
+						Pacientes</span>
 				</a>
 			</nav>
 		</div>
@@ -32,8 +32,6 @@
 				<button class="btn btn-success" type="button" data-toggle="collapse"
 					data-target="#collapseNome" aria-controls="collapseNome">Nome</button>
 				<button class="btn btn-success" type="button" data-toggle="collapse"
-					data-target="#collapseFuncaoBuscar" aria-controls="collapseFuncaoBuscar">Função</button>
-				<button class="btn btn-success" type="button" data-toggle="collapse"
 					data-target="#collapseCPF" aria-controls="collapseCPF">CPF</button>
 			</p>
 			<div class="row">
@@ -42,30 +40,10 @@
 
 						<nav class="navbar navbar-light bg-light">
 							<form class="form-inline" method="GET"
-								action="/funcionarios/buscar/nome">
+								action="/pacientes/buscar/nome">
 								<input class="form-control mr-sm-2" type="search"
 									placeholder="Nome" aria-label="Search" name="nome" />
 								<button class="btn btn-outline-success my-2 my-sm-0">Pesquisar</button>
-							</form>
-						</nav>
-
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<div class="collapse" id="collapseCargo">
-
-						<nav class="navbar navbar-light bg-light">
-							<form class="form-inline" method="GET"
-								action="/funcionarios/buscar/funcao">
-								<select class="form-control mr-sm-2" name="funcao"
-									aria-label="Search">
-									<option value="">Cargo</option>
-									<option value="1">Secretário</option>
-									<option value="2">Terapeuta</option>
-								</select>
-								<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
 							</form>
 						</nav>
 
@@ -78,7 +56,7 @@
 
 						<nav class="navbar navbar-light bg-light">
 							<form class="form-inline" method="GET"
-								action="/funcionarios/buscar/data">
+								action="/pacientes/buscar/data">
 								<input class="form-control mr-sm-2" type="date"
 									aria-label="Search" name="entrada" /> <input
 									class="form-control mr-sm-2" type="date" aria-label="Search"
@@ -102,40 +80,40 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="funcionario : ${listaFuncionarios}">
-							<td th:text="${funcionario.id}"></td>
-							<td th:text="${funcionario.nome}"></td>
+						<tr th:each="paciente : ${listaPacientes}">
+							<td th:text="${paciente.id}"></td>
+							<td th:text="${paciente.nome}"></td>
 
 
 							<td colspan="2"><a class="btn btn-warning btn-sm"
-								th:href="@{/administrativo/funcionarios/editar/{id}(id=${funcionario.id})}"
+								th:href="@{/paciente/pacientes/editar/{id}(id=${paciente.id})}"
 								role="button"> <span class="oi oi-brush" title="Editar"
 									aria-hidden="true"></span>Editar</a> 
 								
 								<a class="btn btn-danger btn-sm" data-toggle="modal"
 								data-target="#modal-warning"
-								th:attr="data-target='#modal-warning'+${funcionario.id }"><span
+								th:attr="data-target='#modal-warning'+${paciente.id }"><span
 									class="oi oi-circle-x" title="Remover" aria-hidden="true"></span>Excluir</a>
 
 								<div class="modal modal-warning fade in"
-									th:id="modal-warning+${funcionario.id}">
+									th:id="modal-warning+${paciente.id}">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title">Remover Funcionário</h5>
+												<h5 class="modal-title">Remover Paciente</h5>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close">
 													<span aria-hidden="true">×</span>
 												</button>
 											</div>
 											<div class="modal-body">
-												<h3>Deseja realmente remover o funcionário?</h3>
+												<h3>Deseja realmente remover o paciente?</h3>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-outline pull-left btn-danger"
 													data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Fechar</button>
 												<a type="button" class="btn btn-outline pull-left btn-success"
-													th:href="@{/administrativo/funcionarios/remover/{id}(id=${funcionario.id})}"><i
+													th:href="@{/paciente/pacientes/remover/{id}(id=${paciente.id})}"><i
 													class="fa fa-check"></i>&nbsp;Sim</a>
 											</div>
 										</div>

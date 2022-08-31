@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Login</title>
+<title>Acesso Negado</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -20,7 +20,7 @@
 	rel="stylesheet">
 
 <!-- Custom styles for this template-->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -41,31 +41,22 @@
 							<div class="col-lg-12">
 								<div class="p-5">
 									<div class="text-center">
-										<h1 class="h2 text-gray-900 mb-4">Bem Vindo ao <b>Clinisys</b>!</h1>
+										<h1 class="h2 text-gray-900 mb-4"><b>Acesso Negado!</b></h1>
+										<h2>Você não tem permissão para acessar esta página.</h2>
+										<h3>Retorne a página anterior ou acesse com um usuário
+											que tenha permissão.</h3>
 									</div>
-									<form class="user" th:action="@{/login}" method="post">
-										<div class="form-group">
-											<input type="email" class="form-control form-control-user"
-												id="exampleInputEmail" aria-describedby="emailHelp"
-												name="username" required="required"
-												placeholder="Insira o Login">
-										</div>
-										<div class="form-group">
-											<input type="password" class="form-control form-control-user"
-												required="required" id="exampleInputPassword"
-												name="password" placeholder="Senha">
-										</div>
-
-										<button type="submit"
-											class="btn btn-primary btn-user btn-block">Login</button>
-
-
-
-									</form>
 									<hr>
 									<div class="text-center">
-										<a class="small" href="forgot-password.html">Esqueceu sua
-											senha?</a>
+										<a href="/administrativo/layout">
+											<h3>Página Inicial</h3>
+										</a>
+									</div>
+									<hr>
+									<div class="text-center">
+										<a href="/logout">
+											<h3>Sair</h3>
+										</a>
 									</div>
 
 								</div>

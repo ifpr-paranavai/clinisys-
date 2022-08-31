@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>Página de Cadastro de Funcionários</title>
+<title>Página de Cadastro de Pacientes</title>
 
 
 </head>
@@ -15,7 +15,7 @@
 
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
 			<h1 class="h3 mb-0 text-gray-800">
-				<u><b>Cadastro de Funcionário</b></u>
+				<u><b>Cadastro de Paciente</b></u>
 			</h1>
 		</div>
 
@@ -23,21 +23,20 @@
 			<nav class="navbar navbar-expand-md navbar-top bg-light">
 				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				</div>
-				<a class="btn btn-primary btn-md"
-					href="/administrativo/funcionarios/listar" role="button"> <span
-					class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
-					<span>Listar Funcionários</span>
+				<a class="btn btn-primary btn-md" href="/paciente/pacientes/listar"
+					role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
+					aria-hidden="true"></span> <span>Listar Pacientes</span>
 				</a>
 			</nav>
 		</div>
 
 		<div class="container" id="cadastro"></div>
 		<form onsubmit="return validacaoDeCPF"
-			action="/administrativo/funcionarios/salvar"
-			th:object="${funcionario}" method="POST">
+			action="/paciente/pacientes/salvar" th:object="${paciente}"
+			method="POST">
 			<div class="form-row">
 				<div class="form-group col-md-10">
-					<label for="nome">Nome do Funcionário</label> <input type="text"
+					<label for="nome">Nome do Paciente</label> <input type="text"
 						class="form-control" id="nome" placeholder="Nome Completo"
 						autofocus="autofocus" th:field="*{nome}" value="" />
 					<div class="invalid-feedback"></div>
@@ -129,7 +128,7 @@
 			</div>
 
 			<input type="hidden" id="id" th:field="*{id}" value="" />
-			
+
 		</form>
 	</section>
 

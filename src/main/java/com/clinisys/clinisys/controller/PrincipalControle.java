@@ -11,13 +11,12 @@ public class PrincipalControle {
 		return "/administrativo/index"; //retorna as pastas contendo o layout
 	}
 	
+//	@GetMapping("/login")
+//	public String acessarLogin() {
+//		return "/login";
+//	}
 	
-	@GetMapping("/login")
-	public String acessarLogin() {
-		return "/login";
-	}
-	
-	@GetMapping("/layout")
+	@GetMapping("/administrativo/layout")
 	public String acessarLayout() {
 		return "/administrativo/fragments/layout";
 	}
