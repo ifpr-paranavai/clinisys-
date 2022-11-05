@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{/administrativo/fragments/layout}">
+<head>
+
+<meta charset="utf-8" />
+<title>Página de Agendamento</title>
+
+
+</head>
+
+<body>
+
+	<section class="container-fluid" layout:fragment="conteudo">
+
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">
+				<u><b>Agendamento</b></u>
+			</h1>
+		</div>
+
+		<div class="page-header">
+			<nav class="navbar navbar-expand-md navbar-top bg-light">
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				</div>
+				<a class="btn btn-primary btn-md"
+					href="/administrativo/agenda/listar" role="button"> <span
+					class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
+					<span>Listar Agendamentos</span>
+				</a>
+			</nav>
+		</div>
+
+		<div class="container" id="cadastro"></div>
+		<form 
+			action="/administrativo/agenda/salvar" th:object="${agenda}"
+			method="POST">
+			<div class="form-row">
+				<div class="form-group col-md-10">
+					<label for="nome">Título</label> <input type="text"
+						class="form-control" id="titulo"
+						placeholder="Informe o Título do Atendimento"
+						autofocus="autofocus" th:field="*{titulo}" value="" />
+					<div class="invalid-feedback"></div>
+				</div>
+				
+				<div class="form-group col-md-5">
+					<label for="data">Data do Agendamento</label> <input
+						type="date" class="form-control" id="dataAgendamento"
+						autofocus="autofocus" th:field="*{dataAgendamento}"
+						value="" />
+					<div class="invalid-feedback"></div>
+				</div>
+				
+				<div class="form-group col-md-5">
+					<label for="time">Hora do Agendamento</label> <input
+						type="time" class="form-control" id="horaAgendamento"
+						autofocus="autofocus" th:field="*{horaAgendamento}"
+						value="" />
+					<div class="invalid-feedback"></div>
+				</div>
+
+				<div class="form-group col-md-10">
+					<label for="descricao">Descrição Breve do Atendimento</label> <input
+						type="text" class="form-control" id="descricao"
+						placeholder="Descreva brevemente o atendimento"
+						autofocus="autofocus" th:field="*{descricao}"
+						value="" />
+					<div class="invalid-feedback"></div>
+				</div>
+
+				<div class="form-group col-md-5">
+					<label for="funcionario">Funcionário</label> <select
+						th:field="*{funcionario}" class="form-control">
+						<option th:each="func: ${listaFuncionarios}" th:value="${func.id}"
+							th:text="${func.nome}"></option>
+					</select>
+
+					<div class="invalid-feedback"></div>
+				</div>
+
+				<div class="form-group col-md-5">
+					<label for="paciente">Paciente</label> <select
+						th:field="*{paciente}" class="form-control">
+						<option th:each="pac: ${listaPacientes}" th:value="${pac.id}"
+							th:text="${pac.nome}"></option>
+					</select>
+
+					<div class="invalid-feedback"></div>
+				</div>
+
+				<div class="form-group col-md-10">
+					<button type="submit" class="btn btn-primary btn-sm float-right">Salvar</button>
+				</div>
+
+			</div>
+
+			<input type="hidden" id="id" th:field="*{id}" value="" />
+
+		</form>
+	</section>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
