@@ -1,5 +1,10 @@
 package com.clinisys.clinisys.controller;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -9,13 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.clinisys.clinisys.model.Permissao;
-import com.clinisys.clinisys.repository.PermissaoRepositorio;
 import com.clinisys.clinisys.repository.FuncaoRepositorio;
 import com.clinisys.clinisys.repository.FuncionarioRepositorio;
-
-import java.util.Optional;
-
-import javax.validation.Valid;
+import com.clinisys.clinisys.repository.PermissaoRepositorio;
 
 @Controller
 public class PermissaoControle {
@@ -25,7 +26,7 @@ public class PermissaoControle {
 
 	@Autowired
 	private FuncionarioRepositorio funcionarioRepositorio;
-	
+
 	@Autowired
 	private FuncaoRepositorio funcaoRepositorio;
 
@@ -63,7 +64,11 @@ public class PermissaoControle {
 		if (result.hasErrors()) {
 			return cadastrar(permissao);
 		}
-		permissaoRepositorio.saveAndFlush(permissao);
+		List<Permissao> permissao1 = permissaoRepositorio.consultaPermissao(permissao.getFuncionario(),
+				permissao.getFuncao());
+		if (permissao1.isEmpty()) {
+			permissaoRepositorio.saveAndFlush(permissao);
+		}
 
 		return cadastrar(new Permissao());
 	}

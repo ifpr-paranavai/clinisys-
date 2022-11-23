@@ -12,7 +12,9 @@
 	<section class="container-fluid" layout:fragment="conteudo">
 
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
-			<h1 class="h3 mb-0 text-gray-800"><u><b>Lista de Agendamentos</b></u></h1>
+			<h1 class="h3 mb-0 text-gray-800">
+				<u><b>Lista de Agendamentos</b></u>
+			</h1>
 		</div>
 		<div class="page-header">
 			<nav class="navbar navbar-expand-md bg-light">
@@ -30,7 +32,8 @@
 			<p>
 				<i class="oi oi-magnifying-glass"></i><span></span>
 				<button class="btn btn-success" type="button" data-toggle="collapse"
-					data-target="#collapseNome" aria-controls="collapseNome">Nome do Paciente</button>
+					data-target="#collapseNome" aria-controls="collapseNome">Nome
+					do Paciente</button>
 			</p>
 			<div class="row">
 				<div class="col">
@@ -60,6 +63,7 @@
 							<th>Horário</th>
 							<th>Funcionário</th>
 							<th>Paciente</th>
+							<th>Procedimento</th>
 							<th>Ação</th>
 						</tr>
 					</thead>
@@ -67,18 +71,18 @@
 						<tr th:each="agenda : ${listaAgenda}">
 							<td th:text="${agenda.id}"></td>
 							<td th:text="${agenda.titulo}"></td>
-							<td th:text="${#dates.format(agenda.dataAgendamento,'dd/MM/yyyy')}"></td>	
-							<td th:text="${agenda.horaAgendamento}"></td>			
+							<td	th:text="${#dates.format(agenda.dataAgendamento,'dd/MM/yyyy')}"></td>
+							<td th:text="${agenda.horaAgendamento}"></td>
 							<td th:text="${agenda.funcionario.nome}"></td>
 							<td th:text="${agenda.paciente.nome}"></td>
+							<td th:text="${agenda.tipoProcedimento.descricaoProcedimento}"></td>
 
 
 							<td colspan="2"><a class="btn btn-warning btn-sm"
 								th:href="@{/administrativo/agenda/editar/{id}(id=${agenda.id})}"
 								role="button"> <span class="oi oi-brush" title="Editar"
-									aria-hidden="true"></span>Editar</a> 
-								
-								<a class="btn btn-danger btn-sm" data-toggle="modal"
+									aria-hidden="true"></span>Editar
+							</a> <a class="btn btn-danger btn-sm" data-toggle="modal"
 								data-target="#modal-warning"
 								th:attr="data-target='#modal-warning'+${agenda.id}"><span
 									class="oi oi-circle-x" title="Remover" aria-hidden="true"></span>Excluir</a>
@@ -98,9 +102,13 @@
 												<h3>Deseja realmente remover o agendamento?</h3>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-outline pull-left btn-danger"
-													data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Fechar</button>
-												<a type="button" class="btn btn-outline pull-left btn-success"
+												<button type="button"
+													class="btn btn-outline pull-left btn-danger"
+													data-dismiss="modal">
+													<i class="fa fa-times"></i>&nbsp;Fechar
+												</button>
+												<a type="button"
+													class="btn btn-outline pull-left btn-success"
 													th:href="@{/administrativo/agenda/remover/{id}(id=${agenda.id})}"><i
 													class="fa fa-check"></i>&nbsp;Sim</a>
 											</div>

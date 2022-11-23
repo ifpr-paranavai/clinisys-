@@ -1,5 +1,6 @@
 package com.clinisys.clinisys.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -62,7 +63,10 @@ public class FuncionarioControle {
 			return cadastrar(funcionario);
 		}
 		funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha()));
-		funcionarioRepositorio.saveAndFlush(funcionario);
+		List<Funcionario> funcionario1 = funcionarioRepositorio.consultaFuncionario(funcionario.getCpf());
+		if(funcionario1.isEmpty() ) {
+			 funcionarioRepositorio.saveAndFlush(funcionario);
+		}
 		
 		return cadastrar(new Funcionario());
 	}

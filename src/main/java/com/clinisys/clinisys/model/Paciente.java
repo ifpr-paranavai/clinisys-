@@ -7,8 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
-@Entity
+@Entity(name = "paciente")
 @Table(name = "paciente")
 public class Paciente implements Serializable{
 	
@@ -20,14 +21,20 @@ public class Paciente implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+	@NotEmpty
 	private String nome;
+	@NotEmpty
 	private String cpf;
 	private String rg;
+	@NotEmpty
 	private String dataNascimento;
+	@NotEmpty
 	private String endereco;
+	@NotEmpty
 	private String sexo;
+	@NotEmpty
 	private String email;
+	@NotEmpty
 	private String senha;
 	
 	public Long getId() {

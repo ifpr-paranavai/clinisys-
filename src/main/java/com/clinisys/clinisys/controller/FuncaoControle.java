@@ -1,5 +1,6 @@
 package com.clinisys.clinisys.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -56,7 +57,10 @@ public class FuncaoControle {
 		if(result.hasErrors()) {
 			return cadastrar(funcao);
 		}
-		funcaoRepositorio.saveAndFlush(funcao);
+		List<Funcao> funcao1 = funcaoRepositorio.consultaFuncao(funcao.getNome());
+		if(funcao1.isEmpty() ) {
+			funcaoRepositorio.saveAndFlush(funcao);
+		}
 		
 		return cadastrar(new Funcao());
 	}

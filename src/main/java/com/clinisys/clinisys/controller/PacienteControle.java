@@ -1,12 +1,14 @@
 package com.clinisys.clinisys.controller;
 
+import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +23,7 @@ public class PacienteControle {
 	
 	@Autowired
 	private PacienteRepositorio pacienteRepositorio;
+	
 	
 	@GetMapping("/paciente/pacientes/cadastrar")
 	public ModelAndView cadastrar(Paciente paciente) {
@@ -50,12 +53,15 @@ public class PacienteControle {
 	}
 	
 	@PostMapping("/paciente/pacientes/salvar")
-	public ModelAndView salvar(@Validated Paciente paciente, BindingResult result) {
+	public ModelAndView salvar(@Valid Paciente paciente, BindingResult result) {
 		if(result.hasErrors()) {
 			return cadastrar(paciente);
 		}
 		paciente.setSenha(new BCryptPasswordEncoder().encode(paciente.getSenha()));
-		pacienteRepositorio.saveAndFlush(paciente);
+		List<Paciente> paciente1 = pacienteRepositorio.consultaPaciente(paciente.getCpf());
+		if(paciente1.isEmpty() ) {
+			pacienteRepositorio.saveAndFlush(paciente);
+		}
 		
 		return cadastrar(new Paciente());
 	}

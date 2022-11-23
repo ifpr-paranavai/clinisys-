@@ -38,7 +38,9 @@
 			<div class="form-row">				
 				<div class="form-group col-md-5">
 					<label>Funcionário</label> <select th:field="*{funcionario}"
+						th:required="required"
 						class="form-control">
+						<option value="">Selecione um Funcionário...</option>
 						<option th:each="func: ${listaFuncionarios}" th:value="${func.id}"
 							th:text="${func.nome}"></option>
 					</select>
@@ -48,7 +50,9 @@
 				
 				<div class="form-group col-md-5">
 					<label>Funcao</label> <select th:field="*{funcao}"
+						th:required="required"
 						class="form-control">
+						<option value="">Selecione uma Função...</option>
 						<option th:each="fun: ${listaFuncoes}" th:value="${fun.id}"
 							th:text="${fun.nome}"></option>
 					</select>

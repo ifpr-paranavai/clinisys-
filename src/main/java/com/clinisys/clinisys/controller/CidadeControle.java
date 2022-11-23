@@ -12,6 +12,7 @@ import com.clinisys.clinisys.model.Cidade;
 import com.clinisys.clinisys.repository.CidadeRepositorio;
 import com.clinisys.clinisys.repository.EstadoRepositorio;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -58,7 +59,10 @@ public class CidadeControle {
 		if (result.hasErrors()) {
 			return cadastrar(cidade);
 		}
-		cidadeRepositorio.saveAndFlush(cidade);
+		List<Cidade> cidade1 = cidadeRepositorio.consultaCidade(cidade.getEstado(), cidade.getNome());
+		if(cidade1.isEmpty() ) {
+			 cidadeRepositorio.saveAndFlush(cidade);
+		}
 
 		return cadastrar(new Cidade());
 	}

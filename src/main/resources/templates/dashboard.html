@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{/administrativo/fragments/layout}">
+<head>
+
+<meta charset="utf-8" />
+<title>Dashboard</title>
+
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+		google.charts.load('current', {'packages': ['corechart']});
+    	google.charts.setOnLoadCallback(drawChart);
+		
+        let numeroFuncionarios = [[${numeroFuncionarios}]];
+        let numeroPacientes = [[${numeroPacientes}]];
+        let listaPacienteFeminino = [[${listaPacienteFeminino}]];
+        let listaPacienteMasculino = [[${listaPacienteMasculino}]];
+        
+        function drawChart() {
+        	  let data = google.visualization.arrayToDataTable([
+        	  ['Usuários', 'Porcentagem'],
+        	  ['Pacientes', numeroPacientes],
+        	  ['Funcionários', numeroFuncionarios],
+        	]);
+        	  
+        	  let data1 = google.visualization.arrayToDataTable([
+            	  ['Pacientes', 'Porcentagem'],
+            	  ['Feminino', listaPacienteFeminino],
+            	  ['Masculino', listaPacienteMasculino],
+            	]);
+				
+        	  //var options = {'width':550, 'height':400};
+        	  
+        	  let chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        	  let chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
+        	  
+        	  chart.draw(data, {
+        		  width: 440,
+        		  height: 260,
+        		  is3D: true,
+        		  colors: ['#4e73df', '#1cc88a']
+        	  });
+			  chart1.draw(data1, {
+				  width: 440,
+        		  height: 260,
+				  is3D: true,
+				  colors: ['#e74a3b', '#4e73df']
+			  })	        	  
+        	}
+	</script>
+
+</head>
+
+<body>
+
+	<section class="container-fluid" layout:fragment="conteudo">
+
+
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">
+				<u><b>Dashboard</b></u>
+			</h1>
+		</div>
+
+		<div class="row">
+
+			<div class="col-xl-3 col-md-6 mb-4">
+				<div class="card border-left-primary shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div
+									class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+									Pacientes Cadastrados</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800">
+									<p class="card-text"
+										th:text="${quantidadePacientes + ' Pacientes Cadastrados'}">
+									<p>
+								</div>
+							</div>
+							<div class="col-auto">
+								<i class="fas fa-fw fa-portrait fa-3x text-black-300"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xl-3 col-md-6 mb-4">
+				<div class="card border-left-success shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div
+									class="text-xs font-weight-bold text-success text-uppercase mb-1">
+									Funcionários</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800">
+									<p class="card-text"
+										th:text="${quantidadeFuncionarios + ' Funcionários Cadastrados'}">
+									<p>
+								</div>
+							</div>
+							<div class="col-auto">
+								<i class="fas fa-fw fa-user fa-3x text-black-300"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xl-3 col-md-6 mb-4">
+				<div class="card border-left-warning shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div
+									class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+									Funções</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800">
+									<p class="card-text"
+										th:text="${quantidadeFuncoes + ' Funções Cadastradas'}">
+									<p>
+								</div>
+							</div>
+							<div class="col-auto">
+								<i class="fas fa-fw fa-cubes fa-3x text-black-300"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xl-3 col-md-6 mb-4">
+				<div class="card border-left-info shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div
+									class="text-xs font-weight-bold text-info text-uppercase mb-1">
+									Agendamentos para Hoje</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800">
+									<p class="card-text"
+										th:text="${quantidadeAgendaHoje + ' Agendamentos cadastrados para Hoje'}">
+									<p>
+								</div>
+							</div>
+							<div class="col-auto">
+								<i class="fa fa-calendar fa-3x text-black-300"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-xl-6 col-lg-5">
+				<div class="card shadow mb-4" >
+					<!-- Card Header - Dropdown -->
+					<div
+						class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">Porcentagem de
+							Usuários</h6>
+						<div class="dropdown no-arrow">
+							<a class="dropdown-toggle" href="#" role="button"
+								id="dropdownMenuLink" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false"> </a>
+						</div>
+					</div>
+					<!-- Card Body -->
+					<div class="card-body" >
+						<div class="chart-pie pt-4 pb-5" style="width: 100%">
+							<div id='piechart' style="padding-left: 20%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xl-6 col-lg-5">
+				<div class="card shadow mb-4">
+					<!-- Card Header - Dropdown -->
+					<div
+						class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">Porcentagem de
+							Pacientes com base no Gênero</h6>
+						<div class="dropdown no-arrow">
+							<a class="dropdown-toggle" href="#" role="button"
+								id="dropdownMenuLink" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false"> </a>
+						</div>
+					</div>
+					<!-- Card Body -->
+					<div class="card-body">
+						<div class="chart-pie pt-4 pb-5" style="width: 100%">
+							<div id='piechart1' style="padding-left: 20%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+	</section>
+
+</body>
+
+</html>

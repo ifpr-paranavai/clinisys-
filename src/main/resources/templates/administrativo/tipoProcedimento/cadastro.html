@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>Página de Cadastro de Cidades</title>
+<title>Página de Cadastro de Tipos de Procedimentos</title>
 
 
 </head>
@@ -15,7 +15,7 @@
 
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
 			<h1 class="h3 mb-0 text-gray-800">
-				<u><b>Cadastro de Cidades</b></u>
+				<u><b>Cadastro de Tipos de Procedimentos</b></u>
 			</h1>
 		</div>
 
@@ -24,35 +24,43 @@
 				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				</div>
 				<a class="btn btn-primary btn-md"
-					href="/administrativo/cidades/listar" role="button"> <span
+					href="/administrativo/tipoProcedimento/listar" role="button"> <span
 					class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
-					<span>Listar Cidades</span>
+					<span>Listar Tipos de Procedimentos</span>
 				</a>
 			</nav>
 		</div>
 
 		<div class="container" id="cadastro"></div>
-		<form onsubmit="return validacaoDeCPF"
-			action="/administrativo/cidades/salvar" th:object="${cidade}"
+		<form
+			action="/administrativo/tipoProcedimento/salvar" th:object="${tipoProcedimento}"
 			method="POST">
-			<div class="form-row">
+			<div class="form-row">				
 				<div class="form-group col-md-5">
-					<label for="nome">Nome da Cidade</label> <input type="text"
-						th:required="required"
-						class="form-control" id="nomecidade" placeholder="Nome da Cidade"
-						autofocus="autofocus" th:field="*{nome}" value="" />
-					<div class="invalid-feedback"></div>
-				</div>
-
-				<div class="form-group col-md-5">
-					<label for="salario">Estado</label> <select th:field="*{estado}"
+					<label>Funcionário</label> <select th:field="*{funcionario}"
 						th:required="required"
 						class="form-control">
-						<option value="">Selecione um Estado...</option>
-						<option th:each="est: ${listaEstados}" th:value="${est.id}"
-							th:text="${est.nome}"></option>
+						<option value="">Selecione um Funcionário...</option>
+						<option th:each="func: ${listaFuncionarios}" th:value="${func.id}"
+							th:text="${func.nome}"></option>
 					</select>
 
+					<div class="invalid-feedback"></div>
+				</div>
+				
+				<div class="form-group col-md-5">
+					<label for="nome">Descrição do Procediento</label> <input type="text"
+						th:required="required"
+						class="form-control" id="descricaoProcedimento" placeholder="Descrição do Procedimento"
+						autofocus="autofocus" th:field="*{descricaoProcedimento}" value="" />
+					<div class="invalid-feedback"></div>
+				</div>
+				
+				<div class="form-group col-md-5">
+					<label for="nome">Valor do Procediento</label> <input type="text"
+						th:required="required"
+						class="form-control" id="valorProcedimento" placeholder="Valor do Procedimento"
+						autofocus="autofocus" th:field="*{valorProcedimento}" value="" />
 					<div class="invalid-feedback"></div>
 				</div>
 
@@ -66,8 +74,6 @@
 
 		</form>
 	</section>
-	
-	<script src="/js/agenda.js"></script>
 
 </body>
 

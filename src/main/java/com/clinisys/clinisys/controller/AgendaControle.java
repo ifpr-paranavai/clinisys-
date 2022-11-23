@@ -1,6 +1,8 @@
 package com.clinisys.clinisys.controller;
 
 import java.text.ParseException;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -17,42 +19,46 @@ import com.clinisys.clinisys.model.Agenda;
 import com.clinisys.clinisys.repository.AgendaRepositorio;
 import com.clinisys.clinisys.repository.FuncionarioRepositorio;
 import com.clinisys.clinisys.repository.PacienteRepositorio;
+import com.clinisys.clinisys.repository.TipoProcedimentoRepositorio;
 
-	
 @Controller
 public class AgendaControle {
-	
+
 	@Autowired
 	private FuncionarioRepositorio funcionarioRepositorio;
-	
+
 	@Autowired
 	private PacienteRepositorio pacienteRepositorio;
-	
+
 	@Autowired
 	private AgendaRepositorio agendaRepositorio;
 	
+	@Autowired 
+	private TipoProcedimentoRepositorio tipoProcedimentoRepositorio;
+
 	@GetMapping("/administrativo/agenda/cadastrar")
 	public ModelAndView cadastrar(Agenda agenda) {
 		ModelAndView mv = new ModelAndView("administrativo/agenda/cadastro");
 		mv.addObject("agenda", agenda);
 		mv.addObject("listaFuncionarios", funcionarioRepositorio.findAll());
 		mv.addObject("listaPacientes", pacienteRepositorio.findAll());
-		return mv;  
+		mv.addObject("listaTipoProcedimentos", tipoProcedimentoRepositorio.findAll());
+		return mv;
 	}
-	
+
 	@GetMapping("/administrativo/agenda/listar")
 	public ModelAndView listar() {
 		ModelAndView mv = new ModelAndView("administrativo/agenda/lista");
 		mv.addObject("listaAgenda", agendaRepositorio.findAll());
 		return mv;
 	}
-	
+
 	@GetMapping("/administrativo/agenda/editar/{id}")
 	public ModelAndView editar(@PathVariable("id") Long id) {
 		Optional<Agenda> agenda = agendaRepositorio.findById(id);
 		return cadastrar(agenda.get());
 	}
-	
+
 	@GetMapping("/administrativo/agenda/remover/{id}")
 	public ModelAndView remover(@PathVariable("id") Long id) {
 		Optional<Agenda> agenda = agendaRepositorio.findById(id);
@@ -62,16 +68,30 @@ public class AgendaControle {
 
 	@PostMapping("/administrativo/agenda/salvar")
 	public ModelAndView salvar(@Valid Agenda agenda, BindingResult result) throws ParseException {
-		
 		System.out.println(result.getAllErrors());
 		if (result.hasErrors()) {
 			return cadastrar(agenda);
-		} 
+		}
 		
-		agendaRepositorio.saveAndFlush(agenda);
+		Date dataAgendamento = agenda.getDataAgendamento();
+		String horaAgendamento = agenda.getHoraAgendamento();
+		Date dataAtual = new Date();
+		
+		//Obrigado CNM e  Cardoso
+        GregorianCalendar gcHoraAgendamento = new GregorianCalendar();
+        gcHoraAgendamento.setTime(dataAgendamento);
+        String[] horaAgenda = horaAgendamento.split(":");
+        gcHoraAgendamento.set(GregorianCalendar.HOUR_OF_DAY, Integer.parseInt(horaAgenda[0]));
+        gcHoraAgendamento.set(GregorianCalendar.MINUTE, Integer.parseInt(horaAgenda[1]));
+        Date dataAgendamentoComHora = gcHoraAgendamento.getTime();
 
+        if (dataAgendamentoComHora.getTime() > dataAtual.getTime()) {
+        	agendaRepositorio.saveAndFlush(agenda);
+        } else {
+        	return cadastrar(agenda);
+        }
+        
 		return cadastrar(new Agenda());
 	}
-	
-	
+
 }

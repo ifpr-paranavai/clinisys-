@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name = "cidade")
 @Table(name = "cidade")
 public class Cidade implements Serializable {
 

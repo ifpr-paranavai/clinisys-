@@ -17,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 
-@Entity
+@Entity(name = "agenda")
 @Table(name = "agenda")
 public class Agenda implements Serializable {
 
@@ -40,8 +40,13 @@ public class Agenda implements Serializable {
 	
 	private String horaAgendamento;
 	
+	private String receita;
+	
 	@ManyToOne
 	private Funcionario funcionario;
+	
+	@ManyToOne
+	private TipoProcedimento tipoProcedimento;
 	
 	@ManyToOne
 	private Paciente paciente;
@@ -77,11 +82,23 @@ public class Agenda implements Serializable {
 	public void setHoraAgendamento(String horaAgendamento) {
 		this.horaAgendamento = horaAgendamento;
 	}
+	public String getReceita() {
+		return receita;
+	}
+	public void setReceita(String receita) {
+		this.receita = receita;
+	}
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
+	}
+	public TipoProcedimento getTipoProcedimento() {
+		return tipoProcedimento;
+	}
+	public void setTipoProcedimento(TipoProcedimento tipoProcedimento) {
+		this.tipoProcedimento = tipoProcedimento;
 	}
 	public Paciente getPaciente() {
 		return paciente;
@@ -92,6 +109,6 @@ public class Agenda implements Serializable {
 	
 	@Override
 	public String toString() {
-		return descricao + "-"+funcionario.getNome() + "-"+paciente.getNome();
+		return descricao + "-"+funcionario.getNome() + "-"+paciente.getNome() + "-"+tipoProcedimento.getDescricaoProcedimento();
 	}	
 }

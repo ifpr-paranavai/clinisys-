@@ -1,5 +1,10 @@
 package com.clinisys.clinisys.controller;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -10,10 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.clinisys.clinisys.model.Estado;
 import com.clinisys.clinisys.repository.EstadoRepositorio;
-
-import java.util.Optional;
-
-import javax.validation.Valid;
 
 	
 @Controller
@@ -54,8 +55,13 @@ public class EstadoControle {
 		if(result.hasErrors()) {
 			return cadastrar(estado);
 		}
-		estadoRepositorio.saveAndFlush(estado);
+		List<Estado> estado1 = estadoRepositorio.consultaEstado(estado.getSigla(), estado.getNome());
+		if(estado1.isEmpty() ) {
+			 estadoRepositorio.saveAndFlush(estado);
+		}
 		
 		return cadastrar(new Estado());
 	}
+	
+
 }

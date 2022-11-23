@@ -36,15 +36,17 @@
 			method="POST">
 			<div class="form-row">
 				<div class="form-group col-md-10">
-					<label for="nome">Nome do Paciente</label> <input type="text"
-						class="form-control" id="nome" placeholder="Nome Completo"
-						autofocus="autofocus" th:field="*{nome}" value="" />
+					<label for="nome">Nome do Paciente</label> <input
+						th:required="required" type="text" class="form-control" id="nome"
+						placeholder="Nome Completo" autofocus="autofocus"
+						th:field="*{nome}" value="" />
 					<div class="invalid-feedback"></div>
 				</div>
 
 				<div class="form-group col-md-5">
 					<label for="datanascimento">Data de nascimento</label> <input
-						type="text" onblur="if (this.value !== '') {validarData()}"
+						th:required="required" type="text"
+						onblur="if (this.value !== '') {validarData()}"
 						class="form-control" id="data"
 						placeholder="Insira apenas os números da data de nascimento"
 						autofocus="autofocus" th:field="*{dataNascimento}"
@@ -58,7 +60,8 @@
 
 				<div class="form-group col-md-5">
 					<label for="sexo">Sexo</label> <select id="sexo"
-						class="form-control" name="sexo" th:field="*{sexo}">
+						th:required="required" class="form-control" name="sexo"
+						th:field="*{sexo}">
 						<option value="">Selecione...</option>
 						<option value="1">Masculino</option>
 						<option value="2">Feminino</option>
@@ -68,7 +71,7 @@
 
 				<div class="form-group col-md-5">
 					<label for="cpf">CPF</label> <input type="text"
-						class="form-control cpf-mask"
+						th:required="required" class="form-control cpf-mask"
 						onblur="if (this.value !== '') {validacaoDeCPF()}"
 						placeholder="Insira apenas os números do CPF"
 						data-mask="###.###.###-##" id="cpf" name="cpf" th:field="*{cpf}"
@@ -93,7 +96,7 @@
 
 				<div class="form-group col-md-10">
 					<label for="endereco">Endereço</label> <input type="text"
-						class="form-control"
+						th:required="required" class="form-control"
 						placeholder="Informe o endereço, contendo nome da RUA, BAIRRO e NUMERAÇÂO"
 						id="endereco" name="endereco" th:field="*{endereco}" value=""
 						autocomplete="off" />
@@ -103,7 +106,7 @@
 
 				<div class="form-group col-md-5">
 					<label for="email">Email</label><input type="text"
-						class="form-control"
+						th:required="required" class="form-control"
 						onblur="if (this.value !== '') {validarEmail()}"
 						placeholder="Informe o email" th:field="*{email}" id="email"
 						name="email" value="" autocomplete="off" /><span
@@ -116,8 +119,9 @@
 
 				<div class="form-group col-md-5">
 					<label for="senha">Senha</label> <input type="password"
-						class="form-control" id="senha" placeholder="Informe a senha"
-						th:field="*{senha}" name="senha" value="" />
+						th:required="required" class="form-control" id="senha"
+						placeholder="Informe a senha" th:field="*{senha}" name="senha"
+						value="" />
 					<div class="invalid-feedback"></div>
 				</div>
 
