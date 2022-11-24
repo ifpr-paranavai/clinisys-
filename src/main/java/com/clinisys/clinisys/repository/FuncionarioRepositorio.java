@@ -12,4 +12,7 @@ public interface FuncionarioRepositorio extends JpaRepository<Funcionario, Long>
 
 	@Query("SELECT func FROM funcionario func WHERE func.cpf = :cpf")
 	public List<Funcionario> consultaFuncionario(@Param("cpf") String cpf);
+	
+	@Query("SELECT func FROM funcionario func where func.email = :email")
+	public List<Funcionario> buscarFuncionarioEmail(String email);
 }
