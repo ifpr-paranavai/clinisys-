@@ -3,6 +3,7 @@ package com.clinisys.clinisys.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.clinisys.clinisys.model.Estado;
+import com.clinisys.clinisys.model.Mensagem;
 import com.clinisys.clinisys.repository.EstadoRepositorio;
 
 	
@@ -51,14 +53,24 @@ public class EstadoControle {
 	}
 	
 	@PostMapping("/administrativo/estados/salvar")
-	public ModelAndView salvar(@Valid Estado estado, BindingResult result) {
-		if(result.hasErrors()) {
-			return cadastrar(estado);
+	public ModelAndView salvar(@Valid Estado estado, BindingResult result, HttpSession session) {
+		
+		try {
+			List<Estado> estado1 = estadoRepositorio.consultaEstado(estado.getSigla(), estado.getNome());
+			if(estado1.isEmpty() ) {
+				 estadoRepositorio.saveAndFlush(estado);
+				 session.setAttribute("mensagem", new Mensagem("ESTADO cadastrado com SUCESSO!!!", "success"));
+			} else {
+				session.setAttribute("mensagem", new Mensagem("Ops! Algo deu ERRADO..., tente novamente!", "danger"));
+			}
+			
+		} catch (Exception e) {
+			if(result.hasErrors()) {
+				return cadastrar(estado);
+			}
 		}
-		List<Estado> estado1 = estadoRepositorio.consultaEstado(estado.getSigla(), estado.getNome());
-		if(estado1.isEmpty() ) {
-			 estadoRepositorio.saveAndFlush(estado);
-		}
+		
+		
 		
 		return cadastrar(new Estado());
 	}

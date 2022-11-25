@@ -1,5 +1,11 @@
 package com.clinisys.clinisys.controller;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -8,13 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.clinisys.clinisys.model.Mensagem;
 import com.clinisys.clinisys.model.TipoProcedimento;
-import com.clinisys.clinisys.repository.TipoProcedimentoRepositorio;
 import com.clinisys.clinisys.repository.FuncionarioRepositorio;
-
-import java.util.Optional;
-
-import javax.validation.Valid;
+import com.clinisys.clinisys.repository.TipoProcedimentoRepositorio;
 
 @Controller
 public class TipoProcedimentoControle {
@@ -54,12 +57,21 @@ public class TipoProcedimentoControle {
 	}
 
 	@PostMapping("/administrativo/tipoProcedimento/salvar")
-	public ModelAndView salvar(@Valid TipoProcedimento tipoProcedimento, BindingResult result) {
-		if (result.hasErrors()) {
-			return cadastrar(tipoProcedimento);
+	public ModelAndView salvar(@Valid TipoProcedimento tipoProcedimento, BindingResult result, HttpSession session) {
+		try {
+			List<TipoProcedimento> tipoProcedimento1 = tipoProcedimentoRepositorio.consultaTipoProcedimento(tipoProcedimento.getDescricaoProcedimento());
+			if(tipoProcedimento1.isEmpty() ) {
+				tipoProcedimentoRepositorio.saveAndFlush(tipoProcedimento);
+				session.setAttribute("mensagem", new Mensagem("PROCEDIMENTO cadastrado com SUCESSO!!!", "success"));
+			} else {
+				session.setAttribute("mensagem", new Mensagem("Ops! Algo deu ERRADO..., tente novamente!", "danger"));
+			}
+		} catch (Exception e) {
+			if (result.hasErrors()) {
+				return cadastrar(tipoProcedimento);
+			}
 		}
-		tipoProcedimentoRepositorio.saveAndFlush(tipoProcedimento);
-
+		
 		return cadastrar(new TipoProcedimento());
 	}
 }

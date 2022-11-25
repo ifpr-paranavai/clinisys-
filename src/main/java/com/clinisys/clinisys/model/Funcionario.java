@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 //import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 
 @Entity(name = "funcionario")
@@ -30,6 +31,7 @@ public class Funcionario implements Serializable{
 	private String endereco;
 	private String sexo;
 	private String email;
+	@Size(min=5, message = "Insira no mínimo 5 caracteres")
 	private String senha;
 //	@ManyToOne
 //	private Funcao funcao; 

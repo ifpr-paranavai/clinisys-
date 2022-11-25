@@ -3,6 +3,7 @@ package com.clinisys.clinisys.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.clinisys.clinisys.model.Mensagem;
 import com.clinisys.clinisys.model.Paciente;
 import com.clinisys.clinisys.repository.PacienteRepositorio;
 
@@ -53,15 +55,24 @@ public class PacienteControle {
 	}
 	
 	@PostMapping("/paciente/pacientes/salvar")
-	public ModelAndView salvar(@Valid Paciente paciente, BindingResult result) {
-		if(result.hasErrors()) {
-			return cadastrar(paciente);
+	public ModelAndView salvar(@Valid Paciente paciente, BindingResult result, HttpSession session) {
+		
+		try {
+			paciente.setSenha(new BCryptPasswordEncoder().encode(paciente.getSenha()));
+			List<Paciente> paciente1 = pacienteRepositorio.consultaPaciente(paciente.getCpf());
+			if(paciente1.isEmpty() ) {
+				pacienteRepositorio.saveAndFlush(paciente);
+				session.setAttribute("mensagem", new Mensagem("PACIENTE cadastrado com SUCESSO!!!", "success"));
+			} else {
+				session.setAttribute("mensagem", new Mensagem("Ops! Algo deu ERRADO..., tente novamente!", "danger"));
+			}
+		} catch (Exception e) {
+			if(result.hasErrors()) {
+				return cadastrar(paciente);
+			}
 		}
-		paciente.setSenha(new BCryptPasswordEncoder().encode(paciente.getSenha()));
-		List<Paciente> paciente1 = pacienteRepositorio.consultaPaciente(paciente.getCpf());
-		if(paciente1.isEmpty() ) {
-			pacienteRepositorio.saveAndFlush(paciente);
-		}
+		
+		
 		
 		return cadastrar(new Paciente());
 	}

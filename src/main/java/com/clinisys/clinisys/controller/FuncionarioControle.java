@@ -3,6 +3,7 @@ package com.clinisys.clinisys.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.clinisys.clinisys.model.Funcionario;
+import com.clinisys.clinisys.model.Mensagem;
 import com.clinisys.clinisys.repository.FuncaoRepositorio;
 import com.clinisys.clinisys.repository.FuncionarioRepositorio;
 
@@ -58,15 +60,24 @@ public class FuncionarioControle {
 	}
 	
 	@PostMapping("/administrativo/funcionarios/salvar")
-	public ModelAndView salvar(@Valid Funcionario funcionario, BindingResult result) {
-		if(result.hasErrors()) {
-			return cadastrar(funcionario);
+	public ModelAndView salvar(@Valid Funcionario funcionario, BindingResult result, HttpSession session) {
+		
+		try {
+			funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha()));
+			List<Funcionario> funcionario1 = funcionarioRepositorio.consultaFuncionario(funcionario.getCpf());
+			if(funcionario1.isEmpty() ) {
+				 funcionarioRepositorio.saveAndFlush(funcionario);
+				 session.setAttribute("mensagem", new Mensagem("FUNCIONÁRIO cadastrado com SUCESSO!!!", "success"));
+			} else {
+				session.setAttribute("mensagem", new Mensagem("Ops! Algo deu ERRADO..., tente novamente!", "danger"));
+			}
+		} catch (Exception e) {
+			if(result.hasErrors()) {
+				return cadastrar(funcionario);
+			}
 		}
-		funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha()));
-		List<Funcionario> funcionario1 = funcionarioRepositorio.consultaFuncionario(funcionario.getCpf());
-		if(funcionario1.isEmpty() ) {
-			 funcionarioRepositorio.saveAndFlush(funcionario);
-		}
+		
+		
 		
 		return cadastrar(new Funcionario());
 	}

@@ -12,6 +12,13 @@
 <body>
 
 	<section class="container-fluid" layout:fragment="conteudo">
+		<div th:if="${session.mensagem}">
+			<div th:classappend="${'alert-' + session.mensagem.tipo}"
+				class="alert alert text-center" role="alert">
+				<span th:text="${session.mensagem.conteudo}"></span>
+			</div>
+			<th:block th:text="${#session.removeAttribute('mensagem')}"></th:block>
+		</div>
 
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
 			<h1 class="h3 mb-0 text-gray-800">

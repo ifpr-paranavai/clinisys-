@@ -3,6 +3,7 @@ package com.clinisys.clinisys.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.clinisys.clinisys.model.Funcao;
+import com.clinisys.clinisys.model.Mensagem;
 import com.clinisys.clinisys.repository.FuncaoRepositorio;
 
 
@@ -53,15 +55,21 @@ public class FuncaoControle {
 	}
 	
 	@PostMapping("/administrativo/funcoes/salvar")
-	public ModelAndView salvar(@Valid Funcao funcao, BindingResult result) {
-		if(result.hasErrors()) {
-			return cadastrar(funcao);
+	public ModelAndView salvar(@Valid Funcao funcao, BindingResult result, HttpSession session) {
+		try {
+			List<Funcao> funcao1 = funcaoRepositorio.consultaFuncao(funcao.getNome());
+			if(funcao1.isEmpty() ) {
+				funcaoRepositorio.saveAndFlush(funcao);
+				session.setAttribute("mensagem", new Mensagem("FUNÇÃO cadastrada com SUCESSO!!!", "success"));
+			}else {
+				session.setAttribute("mensagem", new Mensagem("Ops! Algo deu ERRADO..., tente novamente!", "danger"));
+			}
+			
+		} catch(Exception e) {
+			if(result.hasErrors()) {
+				return cadastrar(funcao);
+			}
 		}
-		List<Funcao> funcao1 = funcaoRepositorio.consultaFuncao(funcao.getNome());
-		if(funcao1.isEmpty() ) {
-			funcaoRepositorio.saveAndFlush(funcao);
-		}
-		
 		return cadastrar(new Funcao());
 	}
 }
