@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.clinisys.clinisys.model.Agenda;
-import com.clinisys.clinisys.model.Cidade;
+import com.clinisys.clinisys.model.Funcionario;
 
 
 
@@ -19,5 +19,11 @@ public interface AgendaRepositorio extends JpaRepository<Agenda, Long>{
 	
 	@Query("SELECT ag FROM agenda ag WHERE ag.dataAgendamento = :dataAgendamento AND ag.horaAgendamento = :horaAgendamento")
 	public List<Agenda> consultaAgendamento(@Param("dataAgendamento") Date dataAgendamento , @Param("horaAgendamento") String horaAgendamento);
+	
+	@Query("SELECT ag FROM agenda ag WHERE ag.funcionario =: funcionario")
+	public List<Agenda> consultaPorTerapeuta(@Param("funcionario") Funcionario funcionario);
+	
+	@Query("FROM agenda ag where ag.horaAgendamento like %?1% ")
+    List<Agenda> findByHora(String horaAgendamento);
 	
 }

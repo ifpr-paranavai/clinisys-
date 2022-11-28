@@ -18,5 +18,8 @@ public interface PacienteRepositorio extends JpaRepository<Paciente, Long> {
 	
 	@Query("SELECT pac FROM paciente pac WHERE pac.cpf = :cpf")
 	public List<Paciente> consultaPaciente(@Param("cpf") String cpf);
+	
+	@Query("FROM paciente pac where pac.nome like %?1% ")
+    List<Paciente> findByNomePaciente(String nome);
 
 }

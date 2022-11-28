@@ -1,5 +1,11 @@
 package com.clinisys.clinisys.controller;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,11 +19,7 @@ import com.clinisys.clinisys.model.Mensagem;
 import com.clinisys.clinisys.repository.CidadeRepositorio;
 import com.clinisys.clinisys.repository.EstadoRepositorio;
 
-import java.util.List;
-import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 @Controller
 public class CidadeControle {
@@ -55,6 +57,13 @@ public class CidadeControle {
 		cidadeRepositorio.delete(cidade.get());
 		return listar();
 	}
+	
+	@GetMapping("/administrativo/cidades/listar/nome")
+    public ModelAndView listarPorNomeCidade(String nome) {
+        ModelAndView mv = new ModelAndView("administrativo/cidades/lista");
+        mv.addObject("listaCidades", cidadeRepositorio.findByNomeCidade(nome));
+        return mv;
+    }
 
 	@PostMapping("/administrativo/cidades/salvar")
 	public ModelAndView salvar(@Valid Cidade cidade, BindingResult result, HttpSession session) {

@@ -59,6 +59,13 @@ public class FuncionarioControle {
 		return listar();
 	}
 	
+	@GetMapping("/administrativo/funcionarios/listar/nome")
+    public ModelAndView listarPorNomeFuncionario(String nome) {
+        ModelAndView mv = new ModelAndView("administrativo/funcionarios/lista");
+        mv.addObject("listaFuncionarios", funcionarioRepositorio.findByNomeFuncionario(nome));
+        return mv;
+    }
+	
 	@PostMapping("/administrativo/funcionarios/salvar")
 	public ModelAndView salvar(@Valid Funcionario funcionario, BindingResult result, HttpSession session) {
 		

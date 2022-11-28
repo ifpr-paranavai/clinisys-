@@ -14,4 +14,7 @@ public interface PermissaoRepositorio extends JpaRepository<Permissao, Long>{
 	
 	@Query("SELECT per FROM permissao per WHERE per.funcionario = :funcionario AND per.funcao = :funcao")
 	public List<Permissao> consultaPermissao(@Param("funcionario") Funcionario funcionario , @Param("funcao") Funcao funcao);
+	
+	@Query("SELECT per FROM permissao per WHERE per.funcao = 4")
+	public List<Permissao> consultaPermissaoTerapeuta();
 }

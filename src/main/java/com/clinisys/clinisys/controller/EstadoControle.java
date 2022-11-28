@@ -52,6 +52,13 @@ public class EstadoControle {
 		return listar();
 	}
 	
+	@GetMapping("/administrativo/estados/listar/nome")
+    public ModelAndView listarPorNomeEstado(String nome) {
+        ModelAndView mv = new ModelAndView("administrativo/estados/lista");
+        mv.addObject("listaEstados", estadoRepositorio.findByNomeEstado(nome));
+        return mv;
+    }
+	
 	@PostMapping("/administrativo/estados/salvar")
 	public ModelAndView salvar(@Valid Estado estado, BindingResult result, HttpSession session) {
 		
@@ -69,8 +76,6 @@ public class EstadoControle {
 				return cadastrar(estado);
 			}
 		}
-		
-		
 		
 		return cadastrar(new Estado());
 	}

@@ -13,4 +13,9 @@ public interface EstadoRepositorio extends JpaRepository<Estado, Long>{
 
 	@Query("SELECT est FROM estado est WHERE est.sigla = :sigla AND est.nome = :nome")
 	public List<Estado> consultaEstado(@Param("sigla") String sigla , @Param("nome") String nome);
+	
+	@Query("FROM estado est where est.nome like %?1% ")
+    List<Estado> findByNomeEstado(String nome);
+	
+
 }

@@ -12,7 +12,9 @@
 	<section class="container-fluid" layout:fragment="conteudo">
 
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
-			<h1 class="h3 mb-0 text-gray-800"><u><b>Lista de Funcionários</b></u></h1>
+			<h1 class="h3 mb-0 text-gray-800">
+				<u><b>Lista de Funcionários</b></u>
+			</h1>
 		</div>
 		<div class="page-header">
 			<nav class="navbar navbar-expand-md bg-light">
@@ -31,10 +33,6 @@
 				<i class="oi oi-magnifying-glass"></i><span></span>
 				<button class="btn btn-success" type="button" data-toggle="collapse"
 					data-target="#collapseNome" aria-controls="collapseNome">Nome</button>
-				<button class="btn btn-success" type="button" data-toggle="collapse"
-					data-target="#collapseFuncaoBuscar" aria-controls="collapseFuncaoBuscar">Função</button>
-				<button class="btn btn-success" type="button" data-toggle="collapse"
-					data-target="#collapseCPF" aria-controls="collapseCPF">CPF</button>
 			</p>
 			<div class="row">
 				<div class="col">
@@ -42,7 +40,7 @@
 
 						<nav class="navbar navbar-light bg-light">
 							<form class="form-inline" method="GET"
-								action="/funcionarios/buscar/nome">
+								action="/administrativo/funcionarios/listar/nome">
 								<input class="form-control mr-sm-2" type="search"
 									placeholder="Nome" aria-label="Search" name="nome" />
 								<button class="btn btn-outline-success my-2 my-sm-0">Pesquisar</button>
@@ -109,9 +107,8 @@
 							<td colspan="2"><a class="btn btn-warning btn-sm"
 								th:href="@{/administrativo/funcionarios/editar/{id}(id=${funcionario.id})}"
 								role="button"> <span class="oi oi-brush" title="Editar"
-									aria-hidden="true"></span>Editar</a> 
-								
-								<a class="btn btn-danger btn-sm" data-toggle="modal"
+									aria-hidden="true"></span>Editar
+							</a> <a class="btn btn-danger btn-sm" data-toggle="modal"
 								data-target="#modal-warning"
 								th:attr="data-target='#modal-warning'+${funcionario.id }"><span
 									class="oi oi-circle-x" title="Remover" aria-hidden="true"></span>Excluir</a>
@@ -131,9 +128,13 @@
 												<h3>Deseja realmente remover o funcionário?</h3>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-outline pull-left btn-danger"
-													data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Fechar</button>
-												<a type="button" class="btn btn-outline pull-left btn-success"
+												<button type="button"
+													class="btn btn-outline pull-left btn-danger"
+													data-dismiss="modal">
+													<i class="fa fa-times"></i>&nbsp;Fechar
+												</button>
+												<a type="button"
+													class="btn btn-outline pull-left btn-success"
 													th:href="@{/administrativo/funcionarios/remover/{id}(id=${funcionario.id})}"><i
 													class="fa fa-check"></i>&nbsp;Sim</a>
 											</div>

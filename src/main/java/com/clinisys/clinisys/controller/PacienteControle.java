@@ -54,6 +54,13 @@ public class PacienteControle {
 		return listar();
 	}
 	
+	@GetMapping("/paciente/pacientes/listar/nome")
+    public ModelAndView listarPorNomePaciente(String nome) {
+        ModelAndView mv = new ModelAndView("/paciente/pacientes/lista");
+        mv.addObject("listaPacientes", pacienteRepositorio.findByNomePaciente(nome));
+        return mv;
+    }
+	
 	@PostMapping("/paciente/pacientes/salvar")
 	public ModelAndView salvar(@Valid Paciente paciente, BindingResult result, HttpSession session) {
 		
